@@ -23,7 +23,7 @@ const Header = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className='flex gap-2 text-xl md:text-2xl mb-3 items-center' style={{ fontFamily: "var(--font-ovo)" }}
             >
-                Hi! I'm William Mark <Image src={assets.hand_icon} alt='' className='w-6' />
+                Hi! I'm Francisco Guerra <Image src={assets.hand_icon} alt='' className='w-6' />
             </motion.h3>
 
             {/* big text */}
@@ -33,7 +33,7 @@ const Header = () => {
                 transition={{ duration: 0.8, delay: 0.5 }}
                 className='text-3xl sm:text-6xl lg:text-[66px]' style={{ fontFamily: "var(--font-ovo)" }}
             >
-                frontend web developer based in London.
+                software developer specializing in scalable web solutions.
             </motion.h1>
 
             {/* description */}
@@ -43,7 +43,7 @@ const Header = () => {
                 transition={{ duration: 0.6, delay: 0.7 }}
                 className='max-w-2xl mx-auto' style={{ fontFamily: "var(--font-ovo)" }}
             >
-                I am a frontend developer from California, USA with 10 years of experience in multiple companies like Microsoft, Tesla and Apple.
+                I am a software engineer passionate about building dynamic and efficient web applications. With experience in full-stack development, I work with modern technologies to create seamless, high-performance digital solutions.
             </motion.p>
 
             {/* buttons */}
@@ -53,7 +53,7 @@ const Header = () => {
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1 }}
                     href="#contact"
-                    className='sm:px-10 sm:py-3 px-5 py-2 border border-white rounded-full bg-black text-white flex items-center gap-2 dark:bg-transparent'
+                    className='sm:px-10 sm:py-3 px-5 py-2 hover:bg-black/60 dark:hover:bg-darkHover border border-white rounded-full bg-black text-white flex items-center gap-2 dark:bg-transparent'
                 >
                     contact me <Image src={assets.right_arrow_white} alt='' className='w-4' />
                 </motion.a>
@@ -61,8 +61,8 @@ const Header = () => {
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1.2 }}
-                    href="/sample-resume.pdf" download
-                    className='sm:px-10 sm:py-3 px-5 py-2 border rounded-full border-gray-500 flex items-center gap-2 bg-white dark:text-black'
+                    href="/CV_FranciscoJavierGuerraQuintanilla.pdf" download
+                    className='sm:px-10 sm:py-3 px-5 py-2 hover:bg-gray-300 border rounded-full border-gray-500 flex items-center gap-2 bg-white dark:text-black'
                 >
                     my resume <Image src={assets.download_icon} alt='' className='w-4' />
                 </motion.a>

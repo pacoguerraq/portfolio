@@ -34,14 +34,14 @@ const Services = () => {
                 transition={{ duration: 0.5, delay: 0.7 }}
                 className='text-center max-w-2xl mx-auto mt-5 mb-12' style={{ fontFamily: "var(--font-ovo)" }}
             >
-                I am a frontend developer from California, USA with 10 years of experience in multiple companies like Microsoft, Tesla and Apple.
+                Custom web solutions, from e-commerce to business automation, ensuring performance and scalability.
             </motion.p>
 
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.9 }}
-                className='grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 my-10'
+                className='grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 my-10'
             >
                 {serviceData.map(({ icon, title, description, link }, index) => (
                     <motion.div
@@ -54,9 +54,9 @@ const Services = () => {
                         <p className='text-sm text-gray-600 leading-5 dark:text-white/80'>
                             {description}
                         </p>
-                        <a href={link} className='flex items-center gap-2 text-sm mt-5'>
+                        {/* <a href={link} className='flex items-center gap-2 text-sm mt-5'>
                             Read more <Image src={assets.right_arrow} className='w-4' alt='' />
-                        </a>
+                        </a> */}
                     </motion.div>
                 ))}
             </motion.div>

@@ -8,6 +8,10 @@ import project_icon_dark from './project-icon-dark.png';
 import vscode from './vscode.png';
 import firebase from './firebase.png';
 import vercel from './vercel.png';
+import docker from './docker.png';
+import htmlcss from './htmlcss.png';
+import tailwindcss from './tailwindcss.png';
+import dynamodb from './dynamodb.png';
 import vercelDark from './vercel-dark.png';
 import postgres from './postgres.png';
 import figma from './figma.png';
@@ -56,6 +60,10 @@ export const assets = {
     vscode,
     firebase,
     aws,
+    docker,
+    tailwindcss,
+    htmlcss,
+    dynamodb,
     figma,
     git,
     mongodb,
@@ -94,37 +102,93 @@ export const assets = {
 
 export const infoList = [
     // { icon: assets.code_icon, iconDark: assets.code_icon_dark, title: 'Languages', description: 'HTML, CSS, JavaScript, TypeScript, Python' },
-    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education', description: 'B.S. Computer Science and Technology Engineering (Aug 2020 - Jun 2024)' },
-    { icon: assets.project_icon, iconDark: assets.project_icon_dark, title: 'Projects', description: 'Many dynamic and responsive websites and apps' }
+    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education', description: 'B.S. Computer Science and Technology Engineering (Aug 2020 - Jun 2024) ✅' },
+    { icon: assets.project_icon, iconDark: assets.project_icon_dark, title: 'Projects', description: 'Web applications, e-commerce platforms, and custom systems for businesses, improving efficiency and user experience' }
 ];
 
 export const serviceData = [
-    { icon: assets.web_icon, title: 'Web design', description: 'Web development is the process of building, programming...', link: '' },
-    { icon: assets.mobile_icon, title: 'Mobile app', description: 'Mobile app development involves creating software for mobile devices...', link: '' },
-    { icon: assets.ui_icon, title: 'UI/UX design', description: 'UI/UX design focuses on creating a seamless user experience...', link: '' },
-    { icon: assets.graphics_icon, title: 'Graphics design', description: 'Creative design solutions to enhance visual communication...', link: '' },
+    {
+        icon: assets.web_icon,
+        title: 'Custom Web Development',
+        description: 'I build fast, responsive, and scalable web applications tailored to your business needs, ensuring high performance and seamless user experience.',
+        link: ''
+    },
+    {
+        icon: assets.ui_icon,
+        title: 'E-Commerce Solutions',
+        description: 'Secure and efficient online stores with payment gateways, inventory management, and a great shopping experience.',
+        link: ''
+    },
+    {
+        icon: assets.mobile_icon,
+        title: 'Custom Business Systems',
+        description: 'Creating internal platforms and automation tools to streamline business operations, from order management to AI-powered chatbots.',
+        link: ''
+    },
+    {
+        icon: assets.graphics_icon,
+        title: 'API Development & Integration',
+        description: 'Designing and implementing RESTful APIs and integrating third-party services to enhance your digital ecosystem.',
+        link: ''
+    },
 ]
 
 export const workData = [
     {
-        title: 'Frontend project',
-        description: 'Web Design',
-        bgImage: '/work-1.png',
+        title: 'We The People',
+        type: 'E-Commerce Website',
+        description: 'Built an online store with payment processing and secure authentication.',
+        techStack: '',
+        bgImage: '/wethepeople.png',
+        link: "https://www.wethepeoplewear.com.mx/",
     },
     {
-        title: 'Geo based app',
-        description: 'Mobile App',
-        bgImage: '/work-2.png',
+        title: 'Pastelería El Postre',
+        type: 'E-Commerce Website',
+        description: "Rebuilt a bakery's online store with Next.js, improving UX and boosting online orders by 25%.",
+        techStack: '',
+        bgImage: '/elpostre.png',
+        link: "https://www.elpostre.com.mx/",
     },
     {
-        title: 'Photography site',
-        description: 'Web Design',
-        bgImage: '/work-3.png',
+        title: 'Galería del Dulce',
+        type: "Order Management System",
+        description: 'Developed a real-time order processing platform, integrating iPos API for automated inventory updates.',
+        techStack: '',
+        bgImage: '/galeriadeldulce.png',
+        link: "https://galeria-del-dulce.vercel.app/",
     },
     {
-        title: 'UI/UX designing',
-        description: 'UI/UX Design',
+        title: 'Cassad',
+        type: 'Business Website',
+        description: 'Developed a professional website for legal and real estate services, enhancing online presence.',
+        techStack: '',
+        bgImage: '/cassad.png',
+        link: "https://www.cassad.com.mx/",
+    },
+    {
+        title: 'Order Registration Platform',
+        type: 'Custom Business System',
+        description: 'Created a system for local businesses to register and print orders efficiently, reducing errors and improving workflow.',
+        techStack: '',
         bgImage: '/work-4.png',
+        link: "",
+    },
+    {
+        title: 'Perficient AI Chatbot',
+        type: 'AI-Powered Chatbot',
+        description: 'Built an AI chatbot integrated with OpenAI API, enabling employees to automate workflows and schedule meetings via Outlook.',
+        techStack: '',
+        bgImage: '/work-1.png',
+        link: "",
+    },
+    {
+        title: 'Comisión del Hermano Mayor',
+        type: 'Website re-design',
+        description: "Redesigned and modernized a local fraternity's website with a custom admin panel for easy content management.",
+        techStack: '',
+        bgImage: '/work-3.png',
+        link: "",
     },
 ]
 
@@ -140,6 +204,11 @@ export const toolsData = [
         darkIcon: assets.git
     },
     {
+        name: 'HTML & CSS',
+        icon: assets.htmlcss,
+        darkIcon: assets.htmlcss
+    },
+    {
         name: 'React',
         icon: assets.react,
         darkIcon: assets.react
@@ -150,6 +219,11 @@ export const toolsData = [
         darkIcon: assets.nextjsDark
     },
     {
+        name: 'Tailwind CSS',
+        icon: assets.tailwindcss,
+        darkIcon: assets.tailwindcss
+    },
+    {
         name: 'Node.js',
         icon: assets.nodejs,
         darkIcon: assets.nodejs
@@ -158,6 +232,11 @@ export const toolsData = [
         name: 'PostgreSQL',
         icon: assets.postgres,
         darkIcon: assets.postgres
+    },
+    {
+        name: 'AWS DynamoDB (NoSQL)',
+        icon: assets.dynamodb,
+        darkIcon: assets.dynamodb
     },
     {
         name: 'Vercel',

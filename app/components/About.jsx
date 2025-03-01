@@ -62,7 +62,7 @@ const About = ({ isDarkMode }) => {
 
                     {/* description */}
                     <p className='mb-10 text-center ' style={{ fontFamily: "var(--font-ovo)" }}>
-                        I am an experienced Frontend developer with over a decade of professional expertise in the field. Throughout my career, I have had the privilege of collaborating with prestigious organizations, contributing to their success and growth.
+                        I am a software developer with expertise in modern web technologies, cloud computing, and API integrations. I have built scalable and efficient applications for various industries, leveraging AWS, Next.js, and database management. Passionate about building user-friendly and high-performance digital solutions.
                     </p>
 
                     {/* Info */}
