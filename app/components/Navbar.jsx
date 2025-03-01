@@ -34,7 +34,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
 
                 {/* logo */}
                 <a href="#top">
-                    <Image src={isDarkMode ? assets.logo_dark : assets.logo} className='w-40 cursor-pointer mr-14' alt='' />
+                    <Image src={isDarkMode ? assets.logo_dark : assets.logo} className='w-36 cursor-pointer' alt='' />
                 </a>
 
                 {/* big screen */}
@@ -46,7 +46,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
                     <li><a className='font-Ovo hover:text-gray-400' style={{ fontFamily: "var(--font-ovo)" }} href="#contact">Contact me</a></li>
                 </ul>
 
-                <div className='flex items-center gap-4'>
+                <div className='flex items-center gap-2'>
 
                     {/* light / dark icon */}
                     <button onClick={() => setIsDarkMode(prev => !prev)} className='cursor-pointer hover:bg-gray-200 dark:hover:bg-darkHover w-10 h-10 hover:rounded-full'>

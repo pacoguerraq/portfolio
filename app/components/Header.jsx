@@ -6,6 +6,8 @@ import { motion } from "motion/react"
 const Header = () => {
     return (
         <div className='w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4'>
+
+            {/* Image */}
             <motion.div
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
@@ -13,6 +15,8 @@ const Header = () => {
             >
                 <Image src={assets.profile_img} alt='' className='rounded-full w-32' />
             </motion.div>
+
+            {/* Name */}
             <motion.h3
                 initial={{ y: -20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
@@ -21,6 +25,8 @@ const Header = () => {
             >
                 Hi! I'm William Mark <Image src={assets.hand_icon} alt='' className='w-6' />
             </motion.h3>
+
+            {/* big text */}
             <motion.h1
                 initial={{ y: -30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
@@ -29,6 +35,8 @@ const Header = () => {
             >
                 frontend web developer based in London.
             </motion.h1>
+
+            {/* description */}
             <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -37,13 +45,15 @@ const Header = () => {
             >
                 I am a frontend developer from California, USA with 10 years of experience in multiple companies like Microsoft, Tesla and Apple.
             </motion.p>
-            <div className='flex flex-col sm:flex-row items-center gap-4 mt-4'>
+
+            {/* buttons */}
+            <div className='flex flex-row items-center gap-4 mt-4'>
                 <motion.a
                     initial={{ y: 30, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1 }}
                     href="#contact"
-                    className='px-10 py-3 border border-white rounded-full bg-black text-white flex items-center gap-2 dark:bg-transparent'
+                    className='sm:px-10 sm:py-3 px-5 py-2 border border-white rounded-full bg-black text-white flex items-center gap-2 dark:bg-transparent'
                 >
                     contact me <Image src={assets.right_arrow_white} alt='' className='w-4' />
                 </motion.a>
@@ -52,7 +62,7 @@ const Header = () => {
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1.2 }}
                     href="/sample-resume.pdf" download
-                    className='px-10 py-3 border rounded-full border-gray-500 flex items-center gap-2 bg-white dark:text-black'
+                    className='sm:px-10 sm:py-3 px-5 py-2 border rounded-full border-gray-500 flex items-center gap-2 bg-white dark:text-black'
                 >
                     my resume <Image src={assets.download_icon} alt='' className='w-4' />
                 </motion.a>
