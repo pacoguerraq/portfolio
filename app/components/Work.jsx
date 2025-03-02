@@ -3,6 +3,12 @@ import Image from 'next/image'
 import React from 'react'
 import { motion } from "motion/react"
 import { useState } from 'react'
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import Link from 'next/link'
+import { ExternalLink } from "lucide-react"
+import { DialogTitle } from '@radix-ui/react-dialog'
 
 const Work = ({ isDarkMode }) => {
 
@@ -48,23 +54,74 @@ const Work = ({ isDarkMode }) => {
                 className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] my-10 gap-5 dark:text-black"
             >
                 {workData.slice(0, showAll ? workData.length : 4).map((project, index) => (
-                    <motion.div
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                        key={index}
-                        style={{ backgroundImage: `url(${project.bgImage})` }}
-                        className="aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group"
-                    >
-                        <div className="bg-white w-10/12 max-w-[90%] rounded-md absolute bottom-5 inset-x-0 mx-auto py-3 px-5 flex items-center justify-between duration-500 group-hover:translate-y-[-4px]">
-                            <div>
-                                <h2 className="font-semibold">{project.title}</h2>
-                                <p className="text-sm text-gray-700">{project.type}</p>
+                    <Dialog key={index}>
+
+                        {/* card */}
+                        <DialogTrigger asChild>
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ duration: 0.3 }}
+                                style={{ backgroundImage: `url(${project.bgImage})` }}
+                                className="aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group"
+                            >
+                                <div className="bg-white w-10/12 max-w-[90%] rounded-md absolute bottom-5 inset-x-0 mx-auto py-3 px-5 flex items-center justify-between duration-500 group-hover:translate-y-[-4px]">
+                                    <div>
+                                        <h2 className="font-semibold">{project.title}</h2>
+                                        <p className="text-sm text-gray-700">{project.type}</p>
+                                    </div>
+                                    <div className="border border-solid rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
+                                        <Image src={assets.send_icon} alt="send icon" className="w-5" />
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </DialogTrigger>
+
+                        {/* dialog */}
+                        <DialogContent className="p-0">
+                            <div className="relative w-full h-[400px] rounded-lg">
+
+                                {/* image */}
+                                <Image src={project.bgImage || "/placeholder.svg"} alt={project.title} fill className="object-cover rounded-lg" />
+
+                                <div className="absolute inset-0 bg-black/40 rounded-lg" />
+                                <div className="absolute bottom-4 left-4 rounded-lg">
+
+                                    {/* type */}
+                                    <Badge variant="secondary" className="mb-2">
+                                        {project.type}
+                                    </Badge>
+
+                                    {/* title */}
+                                    <DialogTitle className="text-2xl font-bold text-white">{project.title}</DialogTitle>
+
+                                </div>
                             </div>
-                            <div className="border border-solid rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-                                <Image src={assets.send_icon} alt="send icon" className="w-5" />
+
+                            <div className="px-6 py-4">
+                                <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
+
+                                <div className="mb-4">
+                                    <h3 className="text-sm font-medium mb-2">Tech Stack</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.techStack.map((tech) => (
+                                            <Badge key={tech} variant="outline">
+                                                {tech}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {project.link && (
+                                    <Button asChild variant="" size="sm" className="w-full">
+                                        <Link href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                                            <span>Visit Project</span>
+                                            <ExternalLink size={16} />
+                                        </Link>
+                                    </Button>
+                                )}
                             </div>
-                        </div>
-                    </motion.div>
+                        </DialogContent>
+                    </Dialog>
                 ))}
             </motion.div>
 
