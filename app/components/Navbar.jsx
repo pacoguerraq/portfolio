@@ -66,7 +66,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
                 </div>
 
                 {/* mobile menu */}
-                <ul ref={sideMenuRef} className='flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-red-50 transition duration-500 dark:bg-darkHover dark:text-white'>
+                <ul ref={sideMenuRef} style={{ backgroundColor: isDarkMode ? '#2a004a' : '#fff1f2' }} className='flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen transition duration-500 dark:text-white'>
 
                     <div className='absolute right-6 top-6' onClick={closeMenu}>
                         <Image src={isDarkMode ? assets.close_white : assets.close_black} alt='' className='w-5 cursor-pointer' />

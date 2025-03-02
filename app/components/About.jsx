@@ -39,7 +39,7 @@ const About = ({ isDarkMode }) => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                className='flex w-full flex-col lg:flex-row items-center gap-20 my-20'
+                className='flex w-full flex-col lg:flex-row items-center gap-20 mb-20 mt-10'
             >
 
                 {/* Image - LEFT SIDE */}
