@@ -55,12 +55,12 @@ const Work = ({ isDarkMode }) => {
                         style={{ backgroundImage: `url(${project.bgImage})` }}
                         className="aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group"
                     >
-                        <div className="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+                        <div className="bg-white w-10/12 max-w-[90%] rounded-md absolute bottom-5 inset-x-0 mx-auto py-3 px-5 flex items-center justify-between duration-500 group-hover:translate-y-[-4px]">
                             <div>
                                 <h2 className="font-semibold">{project.title}</h2>
                                 <p className="text-sm text-gray-700">{project.type}</p>
                             </div>
-                            <div className={`border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition`}>
+                            <div className="border border-solid rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
                                 <Image src={assets.send_icon} alt="send icon" className="w-5" />
                             </div>
                         </div>
@@ -68,13 +68,14 @@ const Work = ({ isDarkMode }) => {
                 ))}
             </motion.div>
 
+
             {workData.length > 4 && (
                 <motion.button
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 1.1 }}
                     onClick={() => setShowAll(!showAll)}
-                    className="w-max flex items-center justify-center gap-2 text-gray-700 border-[0.5px] border-gray-700 rounded-full py-3 px-10 mx-auto mb-20 mt-14 hover:bg-lightHover duration-500 dark:text-white dark:border-white dark:hover:bg-darkHover cursor-pointer"
+                    className="w-max flex items-center justify-center gap-2 text-gray-700 border-[0.5px] border-solid border-gray-700 rounded-full py-3 px-10 mx-auto mb-20 mt-14 hover:bg-lightHover duration-500 dark:text-white dark:border-white dark:hover:bg-darkHover cursor-pointer"
                 >
                     {showAll ? "Show Less" : "Show More"}
                     <Image
