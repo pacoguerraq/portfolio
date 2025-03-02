@@ -13,9 +13,18 @@ const ovo = Ovo({
   weight: ["400"],
 });
 
+
 export const metadata = {
-  title: "Portfolio - Paco Guerra",
-  description: "Paco Guerra's portfolio",
+  title: "Francisco Guerra | Software Developer",
+  description: "Portfolio of Francisco Guerra, a software developer specializing in modern web solutions.",
+  keywords: "Portfolio, Software Development, Web Development, Full-Stack, Next.js, AWS, JavaScript, TypeScript, APIs",
+  openGraph: {
+    title: "Francisco Guerra | Software Developer",
+    description: "Explore my portfolio of web applications, e-commerce platforms, and custom business solutions.",
+    url: process.env.NEXT_PUBLIC_HOST,
+    siteName: "Francisco Guerra Portfolio",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {
