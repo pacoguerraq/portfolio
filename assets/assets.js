@@ -102,7 +102,7 @@ export const assets = {
 
 export const infoList = [
     // { icon: assets.code_icon, iconDark: assets.code_icon_dark, title: 'Languages', description: 'HTML, CSS, JavaScript, TypeScript, Python' },
-    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education', description: 'B.S. Computer Science and Technology Engineering (Aug 2020 - Jun 2024) ✅' },
+    { icon: assets.edu_icon, iconDark: assets.edu_icon_dark, title: 'Education', description: 'B.S. Computer Science and Technology Engineering (Aug 2020 - Jun 2024)' },
     { icon: assets.project_icon, iconDark: assets.project_icon_dark, title: 'Projects', description: 'Web applications, e-commerce platforms, and custom systems for businesses, improving efficiency and user experience' }
 ];
 
