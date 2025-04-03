@@ -164,7 +164,7 @@ export const workData = [
         description: 'Developed a professional website for legal and real estate services, enhancing online presence.',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vercel'],
         bgImage: '/cassad.png',
-        link: "https://www.cassad.com.mx/",
+        link: "https://cassad.vercel.app/",
     },
     {
         title: 'Portfolio Site',
