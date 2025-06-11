@@ -135,6 +135,45 @@ export const serviceData = [
 
 export const workData = [
     {
+        title: 'ConTagg',
+        type: 'NFC Devices Platform',
+        inProgress: true,
+        description: 'A platform to manage NFC devices for sharing personal, medical, or pet info securely—includes device activation, profile management, and scan analytics.',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
+        bgImage: '/contagg.png',
+        link: "https://contagg.vercel.app/",
+    },
+    {
+        title: 'STARTS',
+        type: 'Business Innovation Platform',
+        inProgress: true,
+        description: 'Collaborative innovation platform that transforms employee ideas into business solutions using gamification, structured evaluation, and actionable analytics.',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'AWS Cognito', 'AWS RDS Postgres', 'AWS S3', 'AWS Lambda', 'AWS API Gateway'],
+        bgImage: '/starts.png',
+        inProgress: true,
+        link: "https://starts-nu.vercel.app/"
+    },
+    {
+        title: 'Vía Propósito',
+        type: 'Custom Website',
+        inProgress: true,
+        description: 'A platform to discover your personal profile and strengths through a quick, personalized self-assessment test with instant results.',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Next-Auth', 'Nodemailer'],
+        bgImage: '/viaproposito.png',
+        inProgress: false,
+        link: "https://viaproposito.vercel.app/"
+    },
+    {
+        title: 'Unlid',
+        type: 'Real Estate Platform',
+        inProgress: true,
+        description: 'A platform for posting and requesting real estate properties, featuring user authentication, property management, and advanced search capabilities.',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
+        bgImage: '/unlid.png',
+        inProgress: true,
+        link: "https://www.unlid.com.mx/"
+    },
+    {
         title: 'We The People',
         type: 'E-Commerce Website',
         description: 'Built an online store with payment processing and secure authentication.',
@@ -160,7 +199,7 @@ export const workData = [
     },
     {
         title: 'Cassad',
-        type: 'Business Website',
+        type: 'Custom Website',
         description: 'Developed a professional website for legal and real estate services, enhancing online presence.',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vercel'],
         bgImage: '/cassad.png',
@@ -182,22 +221,22 @@ export const workData = [
         bgImage: '/work-4.png',
         link: "",
     },
-    {
-        title: 'Perficient AI Chatbot',
-        type: 'AI-Powered Chatbot',
-        description: 'Built an AI chatbot integrated with OpenAI API, enabling employees to automate workflows and schedule meetings via Outlook.',
-        techStack: ['Angular', 'TypeScript', 'OpenAI API', 'Azure DevOps API', 'Outlook API'],
-        bgImage: '/work-1.png',
-        link: "",
-    },
-    {
-        title: 'Comisión del Hermano Mayor',
-        type: 'Website Re-Design',
-        description: "Redesigned and modernized a local fraternity's website with a custom admin panel for easy content management.",
-        techStack: ['Django', 'Bootstrap', 'Python', 'Docker', 'PostgreSQL'],
-        bgImage: '/work-3.png',
-        link: "",
-    },
+    // {
+    //     title: 'Perficient AI Chatbot',
+    //     type: 'AI-Powered Chatbot',
+    //     description: 'Built an AI chatbot integrated with OpenAI API, enabling employees to automate workflows and schedule meetings via Outlook.',
+    //     techStack: ['Angular', 'TypeScript', 'OpenAI API', 'Azure DevOps API', 'Outlook API'],
+    //     bgImage: '/work-1.png',
+    //     link: "",
+    // },
+    // {
+    //     title: 'Comisión del Hermano Mayor',
+    //     type: 'Website Re-Design',
+    //     description: "Redesigned and modernized a local fraternity's website with a custom admin panel for easy content management.",
+    //     techStack: ['Django', 'Bootstrap', 'Python', 'Docker', 'PostgreSQL'],
+    //     bgImage: '/work-3.png',
+    //     link: "",
+    // },
 
 ]
 

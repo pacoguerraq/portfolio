@@ -64,6 +64,12 @@ const Work = ({ isDarkMode }) => {
                                 style={{ backgroundImage: `url(${project.bgImage})` }}
                                 className="aspect-square bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer group"
                             >
+                                {/* in progress badge */}
+                                {project.inProgress && (
+                                    <Badge style={{ backgroundColor: 'orange', color: 'black' }} className="absolute top-3 left-3">
+                                        In Progress
+                                    </Badge>
+                                )}
                                 <div className="bg-white w-10/12 max-w-[90%] rounded-md absolute bottom-5 inset-x-0 mx-auto py-3 px-5 flex items-center justify-between duration-500 group-hover:translate-y-[-4px]">
                                     <div>
                                         <h2 className="font-semibold">{project.title}</h2>
@@ -98,6 +104,15 @@ const Work = ({ isDarkMode }) => {
                             </div>
 
                             <div className="px-6 py-4">
+
+                                {/* in progress badge */}
+                                {project.inProgress && (
+                                    <Badge style={{ backgroundColor: 'orange', color: 'black' }} className="mb-4">
+                                        In Progress
+                                    </Badge>
+                                )}
+
+                                {/* description */}
                                 <p className="text-sm text-muted-foreground mb-4">{project.description}</p>
 
                                 <div className="mb-4">
@@ -111,12 +126,18 @@ const Work = ({ isDarkMode }) => {
                                     </div>
                                 </div>
 
-                                {project.link && (
+                                {(project.link && !project.inProgress) && (
                                     <Button asChild variant="" size="sm" className="w-full">
                                         <Link href={project.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                                             <span>Visit Project</span>
                                             <ExternalLink size={16} />
                                         </Link>
+                                    </Button>
+                                )}
+                                {project.inProgress && (
+                                    <Button variant="secondary" size="sm" style={{ backgroundColor: 'orange', color: 'black' }} className="w-full" disabled>
+                                        <span>Coming Soon</span>
+                                        <ExternalLink size={16} />
                                     </Button>
                                 )}
                             </div>
