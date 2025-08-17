@@ -148,8 +148,8 @@ const Work = () => {
                             key={option.key}
                             onClick={() => handleFilterChange(option.key)}
                             className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 hover:shadow-md ${activeFilter === option.key
-                                    ? 'bg-gray-900 text-white shadow-lg hover:bg-gray-800'
-                                    : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300'
+                                ? 'bg-gray-900 text-white shadow-lg hover:bg-gray-800'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:border-gray-300'
                                 }`}
                         >
                             {option.label}
@@ -158,7 +158,7 @@ const Work = () => {
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                     {displayedProjects.map((project, index) => (
                         <div
                             key={index}

@@ -105,10 +105,10 @@ const Contact = () => {
 
     return (
         <section id="contact" className="min-h-screen py-20 bg-[#555455] text-white relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
 
                 {/* Section Header */}
-                <div className={`text-center mb-16 transform transition-all duration-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                <div className={`text-center mb-12 sm:mb-16 transform transition-all duration-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                     }`}>
                     <p className="text-sm text-gray-400 uppercase tracking-wide mb-3">Let's Connect</p>
                     <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white">Get In Touch</h2>
@@ -119,38 +119,38 @@ const Contact = () => {
                 </div>
 
                 {/* Main Content Grid */}
-                <div className="grid lg:grid-cols-2 gap-16 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
                     {/* Left Side - Contact Info */}
                     <div className={`transform transition-all duration-800 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                         }`}>
 
                         {/* Intro Text */}
-                        <div className="mb-12">
-                            <h3 className="text-2xl font-bold text-white mb-4">
+                        <div className="mb-8 sm:mb-12">
+                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
                                 Let's Start a Conversation
                             </h3>
-                            <p className="text-gray-300 leading-relaxed">
+                            <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
                                 Ready to start your next project? Let's discuss how I can help bring your ideas to life with modern web solutions.
                             </p>
                         </div>
 
                         {/* Contact Methods */}
-                        <div className="space-y-6 mb-12">
+                        <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
                             {contactMethods.map((method, index) => (
                                 <a
                                     key={index}
                                     href={method.link}
-                                    className="group bg-white/10 border border-white/10 rounded-xl p-6 flex items-center gap-4 hover:bg-white/10 hover:scale-105 transition-all cursor-pointer"
+                                    className="group bg-white/10 border border-white/10 rounded-xl p-4 sm:p-6 flex items-center gap-3 sm:gap-4 hover:bg-white/10 hover:scale-105 transition-all cursor-pointer"
                                 >
-                                    <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-all flex-shrink-0">
                                         {method.icon}
                                     </div>
-                                    <div className="flex-1">
-                                        <h4 className="font-semibold text-white mb-1">{method.title}</h4>
-                                        <p className="text-gray-300 text-sm">{method.value}</p>
+                                    <div className="flex-1 min-w-0">
+                                        <h4 className="font-semibold text-white mb-1 text-sm sm:text-base">{method.title}</h4>
+                                        <p className="text-gray-300 text-xs sm:text-sm break-all">{method.value}</p>
                                     </div>
-                                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <div className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <path d="M7 17L17 7" />
                                             <path d="M7 7h10v10" />
@@ -161,16 +161,16 @@ const Contact = () => {
                         </div>
 
                         {/* Social Links */}
-                        <div className="pt-8 border-t border-white/10">
-                            <h4 className="font-semibold text-white mb-6">Follow Me</h4>
-                            <div className="flex gap-4">
+                        <div className="pt-6 sm:pt-8 border-t border-white/10">
+                            <h4 className="font-semibold text-white mb-4 sm:mb-6 text-sm sm:text-base">Follow Me</h4>
+                            <div className="flex flex-wrap gap-3 sm:gap-4">
                                 {socialLinks.map((social, index) => (
                                     <a
                                         key={index}
                                         href={social.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="bg-white/10 border border-white/10 px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white hover:scale-105 transition-all"
+                                        className="bg-white/10 border border-white/10 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-medium text-gray-300 hover:bg-white/10 hover:text-white hover:scale-105 transition-all"
                                     >
                                         {social.name}
                                     </a>
@@ -182,8 +182,8 @@ const Contact = () => {
                     {/* Right Side - Contact Form */}
                     <div className={`transform transition-all duration-800 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                         }`}>
-                        <div className="bg-white/10 border border-white/10 rounded-2xl p-8">
-                            <form onSubmit={onSubmit} className="space-y-6">
+                        <div className="bg-white/10 border border-white/10 rounded-2xl p-6 sm:p-8">
+                            <form onSubmit={onSubmit} className="space-y-4 sm:space-y-6">
 
                                 {/* Name Field */}
                                 <div>
@@ -197,7 +197,7 @@ const Contact = () => {
                                         value={formData.name}
                                         onChange={handleInputChange}
                                         required
-                                        className="hover:bg-white/10 w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 transition-all"
+                                        className="hover:bg-white/10 w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 transition-all text-sm sm:text-base"
                                         placeholder="Your full name"
                                     />
                                 </div>
@@ -214,7 +214,7 @@ const Contact = () => {
                                         value={formData.email}
                                         onChange={handleInputChange}
                                         required
-                                        className="hover:bg-white/10 w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 transition-all"
+                                        className="hover:bg-white/10 w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 transition-all text-sm sm:text-base"
                                         placeholder="your.email@example.com"
                                     />
                                 </div>
@@ -231,7 +231,7 @@ const Contact = () => {
                                         onChange={handleInputChange}
                                         required
                                         rows={5}
-                                        className="hover:bg-white/10 w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 transition-all resize-none"
+                                        className="hover:bg-white/10 w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-400 transition-all resize-none text-sm sm:text-base"
                                         placeholder="Tell me about your project..."
                                     />
                                 </div>
@@ -240,20 +240,20 @@ const Contact = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className={`w-full py-4 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${isSubmitting
+                                    className={`w-full py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-sm sm:text-base ${isSubmitting
                                         ? 'bg-[#8b8b8b] cursor-not-allowed'
                                         : 'bg-white text-black hover:bg-gray-100 hover:scale-105'
                                         }`}
                                 >
                                     {isSubmitting ? (
                                         <>
-                                            <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                                            <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
                                             <span>Sending...</span>
                                         </>
                                     ) : (
                                         <>
                                             <span>Send Message</span>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-4 sm:h-4">
                                                 <path d="M7 17L17 7" />
                                                 <path d="M7 7h10v10" />
                                             </svg>
@@ -263,16 +263,16 @@ const Contact = () => {
 
                                 {/* Status Messages */}
                                 {submitStatus === 'success' && (
-                                    <div className="p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
-                                        <p className="text-green-300 text-sm font-medium">
+                                    <div className="p-3 sm:p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
+                                        <p className="text-green-300 text-xs sm:text-sm font-medium">
                                             ✓ Message sent successfully! I'll get back to you soon.
                                         </p>
                                     </div>
                                 )}
 
                                 {submitStatus === 'error' && (
-                                    <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg">
-                                        <p className="text-red-300 text-sm font-medium">
+                                    <div className="p-3 sm:p-4 bg-red-500/20 border border-red-500/30 rounded-lg">
+                                        <p className="text-red-300 text-xs sm:text-sm font-medium">
                                             ✗ Failed to send message. Please try again or contact me directly.
                                         </p>
                                     </div>
@@ -287,13 +287,13 @@ const Contact = () => {
             {/* Background Styling */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 {/* Geometric elements */}
-                <div className="absolute top-32 left-20 w-24 h-24 border border-whiterounded-full opacity-20"></div>
-                <div className="absolute bottom-40 right-16 w-16 h-16 bg-white rounded-2xl opacity-15 rotate-12"></div>
-                <div className="absolute top-1/2 right-20 w-8 h-8 bg-white rounded-full opacity-25"></div>
+                <div className="absolute top-32 left-20 w-24 h-24 border border-white rounded-full opacity-20 hidden sm:block"></div>
+                <div className="absolute bottom-40 right-16 w-16 h-16 bg-white rounded-2xl opacity-15 rotate-12 hidden sm:block"></div>
+                <div className="absolute top-1/2 right-20 w-8 h-8 bg-white rounded-full opacity-25 hidden sm:block"></div>
 
                 {/* Corner accents */}
-                <div className="absolute top-20 right-10 w-20 h-20 border-l-2 border-b-2 border-white opacity-15"></div>
-                <div className="absolute bottom-20 left-10 w-20 h-20 border-r-2 border-t-2 border-white opacity-15"></div>
+                <div className="absolute top-20 right-10 w-20 h-20 border-l-2 border-b-2 border-white opacity-15 hidden sm:block"></div>
+                <div className="absolute bottom-20 left-10 w-20 h-20 border-r-2 border-t-2 border-white opacity-15 hidden sm:block"></div>
 
                 {/* Subtle lines */}
                 {/* <div className="absolute top-1/4 left-32 w-24 h-0.5 bg-white rotate-45 opacity-20"></div>
