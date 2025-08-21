@@ -1,0 +1,163 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// LEADS & CLIENTS - SIMPLIFIED
+// ============================================================================
+
+enum LeadStatus {
+  FOUND // Found on social media, maps, etc.
+  CONTACTED // Initial contact made
+  PROPOSAL_SENT // Proposal has been sent
+  WON // Converted to client
+  LOST // Lead didn't convert
+}
+
+enum LeadSource {
+  INSTAGRAM // Instagram
+  LINKEDIN // LinkedIn
+  FACEBOOK // Facebook
+  GOOGLE_MAPS // Google Maps/Business
+  REFERRAL // Referred by someone
+  OTHER // Other sources
+}
+
+enum ProjectType {
+  STATIC_WEBSITE // Simple static website
+  OTHER // Other services
+}
+
+enum ProjectStatus {
+  PLANNING // Planning phase
+  IN_PROGRESS // Currently working on it
+  REVIEW // Client review
+  COMPLETED // Project completed
+  ON_HOLD // Project paused
+}
+
+enum PlanType {
+  BASIC
+  EXTENDED_BASIC
+  PROFESIONAL
+  EXTENDED_PROFESIONAL
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Contact Information
+  contactName  String
+  email        String?
+  phone        String?
+  businessName String?
+
+  // Lead Details
+  status       LeadStatus  @default(FOUND)
+  source       LeadSource
+  projectType  ProjectType @default(STATIC_WEBSITE)
+  contactNotes String? // General notes about the lead
+  proposalUrl  String? // URL to proposal document (Vercel Blob)
+
+  // Relationships
+  client Client? // One-to-one when converted
+
+  @@map("leads")
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Reference to original lead
+  leadId String @unique
+  lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  // Additional client information
+  contractSigned               Boolean @default(false)
+  contractUrl                  String? // URL to signed contract (Vercel Blob)
+  requiresFactura              Boolean @default(false)
+  constanciaSituacionFiscalUrl String? // Tax situation document URL
+
+  // Relationships
+  project     Project? // One-to-one relationship
+  brandAssets BrandAsset[]
+
+  @@map("clients")
+}
+
+// ============================================================================
+// PROJECTS - SIMPLIFIED
+// ============================================================================
+
+model Project {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Basic Info
+  name        String
+  description String?
+  status      ProjectStatus @default(PLANNING)
+
+  // Plan & Financial
+  planSelected PlanType?
+  finalAmount  Decimal?  @db.Decimal(10, 2)
+  currency     String    @default("USD")
+
+  // URLs
+  websiteUrl     String? // Final website URL
+  googleDriveUrl String? // Google Drive folder for project assets
+
+  // Client Relationship
+  clientId String @unique // One-to-one relationship
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Project Assets & Content
+  brandAssets BrandAsset[]
+
+  @@map("projects")
+}
+
+// ============================================================================
+// BRAND ASSETS & CLIENT CONTENT
+// ============================================================================
+
+model BrandAsset {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  type        String // TEXT_CONTENT, COLOR_PALETTE, GOOGLE_DRIVE_LINK, OTHER
+  description String?
+
+  // Text Content (for copy, descriptions, etc.)
+  textContent String? // For storing text provided by client
+
+  // Color Information (stored as JSON)
+  colorData Json? // e.g., {"primary": "#000000", "secondary": "#ffffff"}
+
+  // Google Drive Link (for logos, images, files)
+  googleDriveUrl String? // Link to client's Google Drive folder/file
+
+  // Relationships
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("brand_assets")
+}

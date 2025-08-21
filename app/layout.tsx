@@ -16,9 +16,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "pacoguerraq | Software Developer",
     description: "Explore my portfolio of web applications, e-commerce platforms, and custom business solutions.",
+    type: "website",
+    locale: "en_US",
     url: process.env.NEXT_PUBLIC_HOST,
     siteName: "pacoguerraq Portfolio",
-    type: "website",
   },
 };
 
