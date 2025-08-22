@@ -216,8 +216,8 @@ export default function LeadFormModal({
                                     <option value="FOUND">Found</option>
                                     <option value="CONTACTED">Contacted</option>
                                     <option value="PROPOSAL_SENT">Proposal Sent</option>
-                                    <option value="WON">Won</option>
                                     <option value="LOST">Lost</option>
+                                    {/* WON is removed - only available through conversion */}
                                 </select>
                             </div>
 

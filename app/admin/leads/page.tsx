@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2, UserCheck, CheckCircle } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import LeadTable from '@/components/admin/LeadTable'
 import LeadFormModal from '@/components/admin/LeadFormModal'
@@ -26,8 +26,11 @@ export default function LeadsPage() {
     const [loading, setLoading] = useState(true)
     const [dialogOpen, setDialogOpen] = useState(false)
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+    const [convertDialogOpen, setConvertDialogOpen] = useState(false)
+    const [successDialogOpen, setSuccessDialogOpen] = useState(false)
     const [editingLead, setEditingLead] = useState<Lead | null>(null)
     const [leadToDelete, setLeadToDelete] = useState<Lead | null>(null)
+    const [leadToConvert, setLeadToConvert] = useState<Lead | null>(null)
     const [dropdownOpen, setDropdownOpen] = useState<string | null>(null)
     const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 })
     const [tooltipOpen, setTooltipOpen] = useState<string | null>(null)
@@ -35,6 +38,7 @@ export default function LeadsPage() {
     const [tooltipContent, setTooltipContent] = useState<any>(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
+    const [isConverting, setIsConverting] = useState(false)
 
     useEffect(() => {
         fetchLeads()
@@ -81,7 +85,9 @@ export default function LeadsPage() {
             const response = await fetch('/api/admin/leads')
             if (response.ok) {
                 const data = await response.json()
-                setLeads(data)
+                // Filter out leads that have been converted to clients (status = WON)
+                const activeLeads = data.filter((lead: Lead) => lead.status !== 'WON')
+                setLeads(activeLeads)
             }
         } catch (error) {
             console.error('Error fetching leads:', error)
@@ -182,6 +188,38 @@ export default function LeadsPage() {
         setDropdownOpen(null)
     }
 
+    const handleConvertToClient = async (lead: Lead) => {
+        setLeadToConvert(lead)
+        setConvertDialogOpen(true)
+        setDropdownOpen(null)
+    }
+
+    const handleConfirmConvert = async () => {
+        if (!leadToConvert) return
+
+        setIsConverting(true)
+        try {
+            const response = await fetch(`/api/admin/leads/${leadToConvert.id}/convert`, {
+                method: 'POST',
+            })
+
+            if (response.ok) {
+                await fetchLeads() // Refresh the leads list
+                setConvertDialogOpen(false)
+                setLeadToConvert(null)
+                setSuccessDialogOpen(true)
+            } else {
+                const error = await response.json()
+                alert(error.error || 'Failed to convert lead to client')
+            }
+        } catch (error) {
+            console.error('Error converting lead to client:', error)
+            alert('Failed to convert lead to client')
+        } finally {
+            setIsConverting(false)
+        }
+    }
+
     const handleCloseDialog = () => {
         setDialogOpen(false)
         setEditingLead(null)
@@ -219,11 +257,13 @@ export default function LeadsPage() {
                 leads={leads}
                 onEdit={handleEdit}
                 onDelete={handleDeleteClick}
+                onConvertToClient={handleConvertToClient}
                 onTooltipShow={handleTooltipShow}
                 tooltipOpen={tooltipOpen}
                 dropdownOpen={dropdownOpen}
                 onDropdownOpen={handleDropdownOpen}
                 isDeleting={isDeleting}
+                isConverting={isConverting}
             />
 
             <LeadFormModal
@@ -233,6 +273,80 @@ export default function LeadsPage() {
                 onSubmit={handleSubmit}
                 isSubmitting={isSubmitting}
             />
+
+            {/* Convert to Client Confirmation Dialog */}
+            <Dialog.Root open={convertDialogOpen} onOpenChange={setConvertDialogOpen}>
+                <Dialog.Portal>
+                    <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
+                    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-md z-50 mx-4">
+                        <Dialog.Title className="text-lg font-semibold text-gray-900 mb-4">
+                            Convert to Client
+                        </Dialog.Title>
+                        <p className="text-gray-600 mb-6">
+                            Are you sure you want to convert "{leadToConvert ? getDisplayName(leadToConvert) : ''}" to a client? This will:
+                        </p>
+                        <ul className="text-sm text-gray-600 mb-6 space-y-1">
+                            <li>• Mark the lead as won</li>
+                            <li>• Create a client record</li>
+                            <li>• Set up an empty project</li>
+                            <li>• Prepare brand assets collection</li>
+                        </ul>
+                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                            <Dialog.Close asChild>
+                                <button
+                                    className="w-full sm:flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50"
+                                    onClick={() => setLeadToConvert(null)}
+                                    disabled={isConverting}
+                                >
+                                    Cancel
+                                </button>
+                            </Dialog.Close>
+                            <button
+                                onClick={handleConfirmConvert}
+                                disabled={isConverting}
+                                className="w-full sm:flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                            >
+                                {isConverting ? (
+                                    <>
+                                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                        <span>Converting...</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <UserCheck className="w-4 h-4" />
+                                        <span>Convert to Client</span>
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </Dialog.Content>
+                </Dialog.Portal>
+            </Dialog.Root>
+
+            {/* Success Dialog */}
+            <Dialog.Root open={successDialogOpen} onOpenChange={setSuccessDialogOpen}>
+                <Dialog.Portal>
+                    <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
+                    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-md z-50 mx-4">
+                        <div className="text-center">
+                            <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
+                                <CheckCircle className="w-6 h-6 text-green-600" />
+                            </div>
+                            <Dialog.Title className="text-lg font-semibold text-gray-900 mb-2">
+                                Successfully Converted!
+                            </Dialog.Title>
+                            <p className="text-gray-600 mb-6">
+                                The lead has been successfully converted to a client with a new project set up and ready for onboarding.
+                            </p>
+                            <Dialog.Close asChild>
+                                <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                                    Continue
+                                </button>
+                            </Dialog.Close>
+                        </div>
+                    </Dialog.Content>
+                </Dialog.Portal>
+            </Dialog.Root>
 
             {/* Delete Confirmation Dialog */}
             <Dialog.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
@@ -315,27 +429,52 @@ export default function LeadsPage() {
             {dropdownOpen && (
                 <div
                     id={`dropdown-${dropdownOpen}`}
-                    className="fixed bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[120px] z-50"
+                    className="fixed bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[140px] z-50"
                     style={{
                         top: `${dropdownPosition.top}px`,
                         left: `${dropdownPosition.left}px`,
                     }}
                 >
                     <button
-                        className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 text-left"
+                        className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 text-left disabled:opacity-50 disabled:cursor-not-allowed"
                         onClick={() => {
                             const lead = leads.find(l => l.id === dropdownOpen)
                             if (lead) handleEdit(lead)
                         }}
+                        disabled={isConverting}
                     >
                         <span>Edit</span>
                     </button>
+
+                    {/* Convert to Client option - always show for active leads */}
                     <button
-                        className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-50 text-left"
+                        className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-green-600 hover:bg-gray-50 text-left disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={() => {
+                            const lead = leads.find(l => l.id === dropdownOpen)
+                            if (lead) handleConvertToClient(lead)
+                        }}
+                        disabled={isConverting || isDeleting}
+                    >
+                        {isConverting ? (
+                            <>
+                                <div className="w-3 h-3 border border-green-600 border-t-transparent rounded-full animate-spin"></div>
+                                <span>Converting...</span>
+                            </>
+                        ) : (
+                            <>
+                                <UserCheck className="w-4 h-4" />
+                                <span>Convert to Client</span>
+                            </>
+                        )}
+                    </button>
+
+                    <button
+                        className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-red-600 hover:bg-gray-50 text-left disabled:opacity-50 disabled:cursor-not-allowed"
                         onClick={() => {
                             const lead = leads.find(l => l.id === dropdownOpen)
                             if (lead) handleDeleteClick(lead)
                         }}
+                        disabled={isConverting}
                     >
                         <span>Delete</span>
                     </button>

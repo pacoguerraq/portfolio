@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MoreHorizontal, Edit, Trash2, ExternalLink } from 'lucide-react'
+import { MoreHorizontal, Edit, Trash2, ExternalLink, UserCheck } from 'lucide-react'
 
 type Lead = {
     id: string
@@ -20,11 +20,13 @@ interface LeadTableProps {
     leads: Lead[]
     onEdit: (lead: Lead) => void
     onDelete: (lead: Lead) => void
+    onConvertToClient: (lead: Lead) => void
     onTooltipShow: (id: string, content: any, event: React.MouseEvent) => void
     tooltipOpen: string | null
     dropdownOpen: string | null
     onDropdownOpen: (leadId: string, event: React.MouseEvent<HTMLButtonElement>) => void
     isDeleting: boolean
+    isConverting: boolean
 }
 
 const statusColors = {
@@ -118,11 +120,13 @@ export default function LeadTable({
     leads,
     onEdit,
     onDelete,
+    onConvertToClient,
     onTooltipShow,
     tooltipOpen,
     dropdownOpen,
     onDropdownOpen,
-    isDeleting
+    isDeleting,
+    isConverting
 }: LeadTableProps) {
     const getDisplayName = (lead: Lead) => {
         return lead.businessName || lead.contactName || 'Unnamed Lead'
@@ -149,10 +153,10 @@ export default function LeadTable({
                             <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
                                 Notes
                             </th>
-                            <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                            <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
                                 Proposal
                             </th>
-                            <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th className="px-4 lg:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Actions
                             </th>
                         </tr>
@@ -238,10 +242,10 @@ export default function LeadTable({
                                             <span className="text-gray-400">-</span>
                                         )}
                                     </td>
-                                    <td className="px-4 lg:px-6 py-4 text-center">
+                                    <td className="px-4 lg:px-6 py-4 text-right">
                                         <button
                                             onClick={(e) => onDropdownOpen(lead.id, e)}
-                                            disabled={isDeleting}
+                                            disabled={isDeleting || isConverting}
                                             className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
                                             <MoreHorizontal className="w-4 h-4" />

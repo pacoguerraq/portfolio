@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import {
     Users,
@@ -84,6 +84,7 @@ export default function AdminLayout({
 }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const router = useRouter()
+    const pathname = usePathname()
 
     const handleLogout = async () => {
         try {
@@ -157,19 +158,23 @@ export default function AdminLayout({
                                 </h3>
                             </div>
                             <div className="space-y-1">
-                                {adminMenuItems.map((item) => (
-                                    <Link
-                                        key={item.href}
-                                        href={item.href}
-                                        className="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors"
-                                        onClick={() => setSidebarOpen(false)}
-                                    >
-                                        <div className={`flex-shrink-0 w-6 h-6 rounded ${item.color} flex items-center justify-center mr-3`}>
-                                            <item.icon className="w-4 h-4 text-white" />
-                                        </div>
-                                        {item.title}
-                                    </Link>
-                                ))}
+                                {adminMenuItems.map((item) => {
+                                    const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href))
+                                    return (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            className={`group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors
+                                                ${isActive ? 'bg-gray-200 text-black font-semibold shadow' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'}`}
+                                            onClick={() => setSidebarOpen(false)}
+                                        >
+                                            <div className={`flex-shrink-0 w-6 h-6 rounded ${item.color} flex items-center justify-center mr-3`}>
+                                                <item.icon className="w-4 h-4 text-white" />
+                                            </div>
+                                            {item.title}
+                                        </Link>
+                                    )
+                                })}
                             </div>
                         </nav>
 
