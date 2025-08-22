@@ -6,11 +6,11 @@ const prisma = new PrismaClient()
 // PUT - Update lead
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
         const data = await request.json()
-        const { id } = params
+        const { id } = await context.params
 
         // Validate required fields
         if (!data.source) {
@@ -48,10 +48,10 @@ export async function PUT(
 // DELETE - Delete lead
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
-        const { id } = params
+        const { id } = await context.params
 
         await prisma.lead.delete({
             where: { id }
