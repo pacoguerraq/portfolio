@@ -28,6 +28,12 @@ const adminMenuItems = [
         color: 'bg-gray-500'
     },
     {
+        title: 'Lead Management',
+        href: '/admin/leads',
+        icon: MessageSquare,
+        color: 'bg-purple-500'
+    },
+    {
         title: 'Client Management',
         href: '/admin/clients',
         icon: Users,
@@ -38,12 +44,6 @@ const adminMenuItems = [
         href: '/admin/templates',
         icon: Code,
         color: 'bg-green-500'
-    },
-    {
-        title: 'Lead Management',
-        href: '/admin/leads',
-        icon: MessageSquare,
-        color: 'bg-purple-500'
     },
     {
         title: 'Analytics',

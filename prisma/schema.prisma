@@ -49,6 +49,7 @@ enum PlanType {
   EXTENDED_BASIC
   PROFESIONAL
   EXTENDED_PROFESIONAL
+  CUSTOM
 }
 
 model Lead {
@@ -57,15 +58,15 @@ model Lead {
   updatedAt DateTime @updatedAt
 
   // Contact Information
-  contactName  String
+  contactName  String?
   email        String?
   phone        String?
   businessName String?
 
   // Lead Details
-  status       LeadStatus  @default(FOUND)
+  status       LeadStatus   @default(FOUND)
   source       LeadSource
-  projectType  ProjectType @default(STATIC_WEBSITE)
+  projectType  ProjectType? @default(STATIC_WEBSITE)
   contactNotes String? // General notes about the lead
   proposalUrl  String? // URL to proposal document (Vercel Blob)
 
@@ -85,14 +86,13 @@ model Client {
   lead   Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   // Additional client information
-  contractSigned               Boolean @default(false)
+  contractSigned               Boolean  @default(false)
   contractUrl                  String? // URL to signed contract (Vercel Blob)
-  requiresFactura              Boolean @default(false)
+  requiresFactura              Boolean? @default(false)
   constanciaSituacionFiscalUrl String? // Tax situation document URL
 
   // Relationships
-  project     Project? // One-to-one relationship
-  brandAssets BrandAsset[]
+  project Project? // One-to-one relationship
 
   @@map("clients")
 }
@@ -118,20 +118,20 @@ model Project {
 
   // URLs
   websiteUrl     String? // Final website URL
-  googleDriveUrl String? // Google Drive folder for project assets
+  googleDriveUrl String? // Google Drive folder for own project management (parent folder)
 
   // Client Relationship
   clientId String @unique // One-to-one relationship
   client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   // Project Assets & Content
-  brandAssets BrandAsset[]
+  brandAsset BrandAsset? // One-to-one relationship
 
   @@map("projects")
 }
 
 // ============================================================================
-// BRAND ASSETS & CLIENT CONTENT
+// BRAND ASSETS & CLIENT CONTENT - CLIENT ONBOARDING FORM
 // ============================================================================
 
 model BrandAsset {
@@ -139,25 +139,26 @@ model BrandAsset {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name        String
-  type        String // TEXT_CONTENT, COLOR_PALETTE, GOOGLE_DRIVE_LINK, OTHER
-  description String?
+  // Color Palette (text input from client)
+  colorPalette String? // Client can input hex codes, color names, or descriptions
 
-  // Text Content (for copy, descriptions, etc.)
-  textContent String? // For storing text provided by client
+  // Business Content Document (PDF/Word upload)
+  businessContentUrl  String? // Vercel Blob URL for uploaded document
+  businessContentName String? // Original filename for reference
 
-  // Color Information (stored as JSON)
-  colorData Json? // e.g., {"primary": "#000000", "secondary": "#ffffff"}
+  // Media Assets (Google Drive - public folder for client uploads)
+  googleDriveImagesUrl String? // Public Google Drive folder link for client to upload images/logos
 
-  // Google Drive Link (for logos, images, files)
-  googleDriveUrl String? // Link to client's Google Drive folder/file
+  // Additional Information
+  additionalComments String? // Any extra info from the client
+
+  // Completion tracking
+  isCompleted Boolean   @default(false) // Whether client has submitted the form
+  submittedAt DateTime? // When the form was submitted
 
   // Relationships
-  clientId String
-  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
-
-  projectId String?
-  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String  @unique // One-to-one with project
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@map("brand_assets")
 }
