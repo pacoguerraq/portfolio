@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
+import { generateSimplePassword, encryptPassword } from '../../../../../../lib/password-utils'
 
 const prisma = new PrismaClient()
 
@@ -59,10 +60,12 @@ export async function POST(
                 }
             })
 
-            // 4. Create empty brand asset for client onboarding
+            // 4. Create empty brand asset for client onboarding with password
+            const clientPassword = generateSimplePassword()
             const brandAsset = await tx.brandAsset.create({
                 data: {
                     projectId: project.id,
+                    accessPassword: encryptPassword(clientPassword),
                     isCompleted: false,
                 }
             })
@@ -71,7 +74,8 @@ export async function POST(
                 lead: updatedLead,
                 client,
                 project,
-                brandAsset
+                brandAsset,
+                clientPassword // Include the plain password in the response for immediate use
             }
         })
 

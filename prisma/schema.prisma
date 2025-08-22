@@ -118,7 +118,7 @@ model Project {
 
   // URLs
   websiteUrl     String? // Final website URL
-  googleDriveUrl String? // Google Drive folder for own project management (parent folder)
+  googleDriveUrl String? // Google Drive folder for project assets
 
   // Client Relationship
   clientId String @unique // One-to-one relationship
@@ -151,6 +151,9 @@ model BrandAsset {
 
   // Additional Information
   additionalComments String? // Any extra info from the client
+
+  // Access Control
+  accessPassword String? // Simple password for client portal access (hashed)
 
   // Completion tracking
   isCompleted Boolean   @default(false) // Whether client has submitted the form

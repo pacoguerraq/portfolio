@@ -38,6 +38,7 @@ type Project = {
         businessContentName: string | null
         googleDriveImagesUrl: string | null
         additionalComments: string | null
+        accessPassword: string | null
         isCompleted: boolean
         submittedAt: string | null
     } | null
@@ -618,6 +619,14 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                     <p className="text-sm font-mono text-blue-600 mt-1">
                                         /client-portal/{project.id}
                                     </p>
+                                    {project.brandAsset.accessPassword && (
+                                        <div className="mt-2 pt-2 border-t border-gray-200">
+                                            <p className="text-xs text-gray-500 mb-1">Client Portal Password:</p>
+                                            <p className="text-sm font-mono bg-white px-2 py-1 rounded border font-semibold text-green-700">
+                                                {project.brandAsset.accessPassword}
+                                            </p>
+                                        </div>
+                                    )}
                                     <p className="text-xs text-gray-500 mt-2">
                                         This will be a password-protected form for the client to upload their brand assets.
                                     </p>
@@ -700,15 +709,50 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                     </div>
                                 )}
 
-                                {/* Client Images */}
-                                {project.brandAsset.googleDriveImagesUrl && (
-                                    <div>
-                                        <h3 className="font-medium text-gray-900 mb-2">Client Images & Assets</h3>
+                                {/* Client Images - Editable */}
+                                <div>
+                                    <h3 className="font-medium text-gray-900 mb-2">Client Images & Assets</h3>
+                                    <form
+                                        onSubmit={async (e) => {
+                                            e.preventDefault()
+                                            if (!project.brandAsset) return
+                                            const form = e.target as HTMLFormElement
+                                            const input = form.elements.namedItem('googleDriveImagesUrl') as HTMLInputElement
+                                            const url = input.value.trim()
+                                            if (!url) return
+                                            try {
+                                                await fetch(`/api/admin/brand-assets/${project.brandAsset.id}`, {
+                                                    method: 'PUT',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({ googleDriveImagesUrl: url }),
+                                                })
+                                                await fetchProject()
+                                            } catch (err) {
+                                                alert('Failed to update Google Drive Images URL')
+                                            }
+                                        }}
+                                        className="flex items-center space-x-2"
+                                    >
+                                        <input
+                                            type="url"
+                                            name="googleDriveImagesUrl"
+                                            defaultValue={project.brandAsset.googleDriveImagesUrl || ''}
+                                            placeholder="https://drive.google.com/folder..."
+                                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                        />
+                                        <button
+                                            type="submit"
+                                            className="px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors"
+                                        >
+                                            Save
+                                        </button>
+                                    </form>
+                                    {project.brandAsset.googleDriveImagesUrl && (
                                         <a
                                             href={project.brandAsset.googleDriveImagesUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                                            className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors mt-2"
                                         >
                                             <Palette className="w-5 h-5 text-green-600" />
                                             <div className="flex-1">
@@ -717,8 +761,8 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                             </div>
                                             <ExternalLink className="w-4 h-4 text-gray-400" />
                                         </a>
-                                    </div>
-                                )}
+                                    )}
+                                </div>
 
                                 {/* Additional Comments */}
                                 {project.brandAsset.additionalComments && (
@@ -753,19 +797,46 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                         </p>
                                         <div className="flex items-center space-x-2">
                                             <code className="flex-1 bg-white px-3 py-2 rounded border text-sm">
-                                                {window.location.origin}/client-portal/{project.id}
+                                                {typeof window !== 'undefined' ? window.location.origin : ''}/client-portal/{project.id}
                                             </code>
                                             <button
                                                 onClick={() => {
-                                                    navigator.clipboard.writeText(`${window.location.origin}/client-portal/${project.id}`)
+                                                    if (typeof window !== 'undefined') {
+                                                        navigator.clipboard.writeText(`${window.location.origin}/client-portal/${project.id}`)
+                                                    }
                                                 }}
                                                 className="px-3 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
                                             >
                                                 Copy
                                             </button>
                                         </div>
-                                        <p className="text-xs text-blue-600 mt-2">
-                                            Note: The client portal will be password-protected for security.
+
+                                        {project.brandAsset.accessPassword && (
+                                            <div className="mt-3 pt-3 border-t border-blue-200">
+                                                <p className="text-sm text-blue-800 mb-2">Client Portal Password:</p>
+                                                <div className="flex items-center space-x-2">
+                                                    <code className="flex-1 bg-white px-3 py-2 rounded border font-semibold text-green-700">
+                                                        {project.brandAsset.accessPassword}
+                                                    </code>
+                                                    <button
+                                                        onClick={() => {
+                                                            if (project.brandAsset?.accessPassword && typeof window !== 'undefined') {
+                                                                navigator.clipboard.writeText(project.brandAsset.accessPassword)
+                                                            }
+                                                        }}
+                                                        className="px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors"
+                                                    >
+                                                        Copy
+                                                    </button>
+                                                </div>
+                                                <p className="text-xs text-blue-600 mt-2">
+                                                    Share this password with your client for secure access to the portal.
+                                                </p>
+                                            </div>
+                                        )}
+
+                                        <p className="text-xs text-blue-600 mt-3">
+                                            Note: The client portal is password-protected for security.
                                         </p>
                                     </div>
                                 </div>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
+import { decryptPassword } from '../../../../../lib/password-utils'
 
 const prisma = new PrismaClient()
 
@@ -28,6 +29,15 @@ export async function GET(
                 { error: 'Project not found' },
                 { status: 404 }
             )
+        }
+
+        // Decrypt the brand asset password for admin viewing
+        if (project.brandAsset?.accessPassword) {
+            const decryptedPassword = decryptPassword(project.brandAsset.accessPassword)
+            project.brandAsset = {
+                ...project.brandAsset,
+                accessPassword: decryptedPassword // Send decrypted password to admin
+            }
         }
 
         return NextResponse.json(project)

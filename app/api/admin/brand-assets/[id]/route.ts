@@ -12,6 +12,21 @@ export async function PUT(
         const data = await request.json()
         const { id } = await context.params
 
+        // If only googleDriveImagesUrl is present, update only that field
+        if (
+            Object.keys(data).length === 1 &&
+            Object.prototype.hasOwnProperty.call(data, 'googleDriveImagesUrl')
+        ) {
+            const brandAsset = await prisma.brandAsset.update({
+                where: { id },
+                data: {
+                    googleDriveImagesUrl: data.googleDriveImagesUrl || null,
+                },
+            })
+            return NextResponse.json(brandAsset)
+        }
+
+        // Otherwise, update all fields as before
         const brandAsset = await prisma.brandAsset.update({
             where: { id },
             data: {
@@ -22,9 +37,8 @@ export async function PUT(
                 additionalComments: data.additionalComments || null,
                 isCompleted: data.isCompleted ?? false,
                 submittedAt: data.isCompleted ? new Date() : null,
-            }
+            },
         })
-
         return NextResponse.json(brandAsset)
     } catch (error) {
         console.error('Error updating brand asset:', error)

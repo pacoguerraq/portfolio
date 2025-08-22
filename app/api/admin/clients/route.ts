@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
+import { decryptPassword } from '../../../../lib/password-utils'
 
 const prisma = new PrismaClient()
 
@@ -24,6 +25,15 @@ export async function GET() {
                     brandAsset = await prisma.brandAsset.findUnique({
                         where: { projectId: client.project.id }
                     })
+
+                    // Decrypt password for admin viewing
+                    if (brandAsset?.accessPassword) {
+                        const decryptedPassword = decryptPassword(brandAsset.accessPassword)
+                        brandAsset = {
+                            ...brandAsset,
+                            accessPassword: decryptedPassword
+                        }
+                    }
                 }
                 return {
                     ...client,
