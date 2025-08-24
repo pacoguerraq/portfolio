@@ -17,12 +17,17 @@ export async function POST(request: NextRequest) {
         const allowedTypes = [
             'application/pdf',
             'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.ms-powerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'image/jpeg',
+            'image/png',
+            'image/jpg',
         ]
 
         if (!allowedTypes.includes(file.type)) {
             return NextResponse.json(
-                { error: 'Invalid file type. Only PDF and Word documents are allowed.' },
+                { error: 'Invalid file type. Only PDF, Word, PowerPoint, and image files (JPG, JPEG, PNG) are allowed.' },
                 { status: 400 }
             )
         }

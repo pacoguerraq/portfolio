@@ -235,7 +235,7 @@ export const workData: WorkItem[] = [
         description: 'A platform for buying and selling vehicles, featuring advanced search filters, admin dashboard, and statistics.',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Motion'],
         bgImage: '/fyradrive.png',
-        link: "https://fyradrive-three.vercel.app/",
+        link: "https://fyradrive.com/",
     },
     {
         title: 'Vía Propósito',
@@ -274,15 +274,15 @@ export const workData: WorkItem[] = [
         bgImage: '/elpostre.png',
         link: "https://www.elpostre.com.mx/",
     },
-    {
-        title: 'Galería del Dulce',
-        type: "Order Management System",
-        category: 'custom-platform',
-        description: 'Developed a real-time order processing platform, integrating iPos API for automated inventory updates.',
-        techStack: ['Next.js', 'Tailwind CSS', 'Vercel', 'iPos API'],
-        bgImage: '/galeriadeldulce.png',
-        link: "https://galeria-del-dulce.vercel.app/",
-    },
+    // {
+    //     title: 'Galería del Dulce',
+    //     type: "Order Management System",
+    //     category: 'custom-platform',
+    //     description: 'Developed a real-time order processing platform, integrating iPos API for automated inventory updates.',
+    //     techStack: ['Next.js', 'Tailwind CSS', 'Vercel', 'iPos API'],
+    //     bgImage: '/galeriadeldulce.png',
+    //     link: "https://galeria-del-dulce.vercel.app/",
+    // },
     {
         title: 'Cassad',
         type: 'Custom Website',
