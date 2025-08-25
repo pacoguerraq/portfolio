@@ -6,18 +6,13 @@ import Link from 'next/link'
 import {
     Users,
     FileText,
-    BarChart3,
     LogOut,
     Menu,
-    X,
     Globe,
     MessageSquare,
-    Calendar,
-    Database,
     Code,
     Palette,
-    Home,
-    Shield
+    Home
 } from 'lucide-react'
 
 const adminMenuItems = [
@@ -40,41 +35,29 @@ const adminMenuItems = [
         color: 'bg-blue-500'
     },
     {
-        title: 'Project Templates',
-        href: '/admin/templates',
+        title: 'Contact Messages',
+        href: '/admin/messages',
+        icon: MessageSquare,
+        color: 'bg-red-500'
+    },
+    {
+        title: 'Project Setup',
+        href: '/admin/project-setup',
         icon: Code,
         color: 'bg-green-500'
     },
     {
-        title: 'Analytics',
-        href: '/admin/analytics',
-        icon: BarChart3,
-        color: 'bg-orange-500'
-    },
-    {
-        title: 'Content Manager',
-        href: '/admin/content',
+        title: 'Master Prompts',
+        href: '/admin/prompts',
         icon: FileText,
-        color: 'bg-pink-500'
+        color: 'bg-yellow-500'
     },
     {
-        title: 'Resource Library',
+        title: 'Resources',
         href: '/admin/resources',
-        icon: Database,
-        color: 'bg-indigo-500'
-    },
-    {
-        title: 'Design Assets',
-        href: '/admin/assets',
         icon: Palette,
         color: 'bg-teal-500'
     },
-    {
-        title: 'Schedule',
-        href: '/admin/schedule',
-        icon: Calendar,
-        color: 'bg-red-500'
-    }
 ]
 
 export default function AdminLayout({

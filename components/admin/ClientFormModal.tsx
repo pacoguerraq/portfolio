@@ -114,7 +114,7 @@ export default function ClientFormModal({
         <Dialog.Root open={isOpen} onOpenChange={onClose}>
             <Dialog.Portal>
                 <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
-                <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-2xl z-50 max-h-[90vh] overflow-y-auto mx-4">
+                <Dialog.Content className="fixed top-1/2 left-0 right-0 mx-auto -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-[90vw] max-w-2xl z-50 max-h-[90vh] overflow-y-auto">
                     <div className="flex items-center justify-between mb-4">
                         <Dialog.Title className="text-lg font-semibold text-gray-900">
                             {editingClient ? `Edit Client - ${getDisplayName(editingClient)}` : 'Edit Client'}

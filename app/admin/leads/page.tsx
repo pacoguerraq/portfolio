@@ -1,3 +1,4 @@
+// app/admin/leads/page.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -278,23 +279,23 @@ export default function LeadsPage() {
             <Dialog.Root open={convertDialogOpen} onOpenChange={setConvertDialogOpen}>
                 <Dialog.Portal>
                     <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
-                    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-md z-50 mx-4">
+                    <Dialog.Content className="fixed top-1/2 left-0 right-0 mx-auto -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 lg:p-6 w-[90vw] max-w-md z-50 max-h-[90vh] overflow-y-auto">
                         <Dialog.Title className="text-lg font-semibold text-gray-900 mb-4">
                             Convert to Client
                         </Dialog.Title>
-                        <p className="text-gray-600 mb-6">
+                        <p className="text-gray-600 mb-4 text-sm lg:text-base">
                             Are you sure you want to convert "{leadToConvert ? getDisplayName(leadToConvert) : ''}" to a client? This will:
                         </p>
-                        <ul className="text-sm text-gray-600 mb-6 space-y-1">
+                        <ul className="text-sm text-gray-600 mb-6 space-y-1 pl-4">
                             <li>• Mark the lead as won</li>
                             <li>• Create a client record</li>
                             <li>• Set up an empty project</li>
                             <li>• Prepare brand assets collection</li>
                         </ul>
-                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                        <div className="flex flex-col space-y-3 lg:flex-row lg:space-y-0 lg:space-x-3">
                             <Dialog.Close asChild>
                                 <button
-                                    className="w-full sm:flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50"
+                                    className="w-full lg:flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 text-sm lg:text-base"
                                     onClick={() => setLeadToConvert(null)}
                                     disabled={isConverting}
                                 >
@@ -304,7 +305,7 @@ export default function LeadsPage() {
                             <button
                                 onClick={handleConfirmConvert}
                                 disabled={isConverting}
-                                className="w-full sm:flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                                className="w-full lg:flex-1 bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 text-sm lg:text-base"
                             >
                                 {isConverting ? (
                                     <>
@@ -327,7 +328,7 @@ export default function LeadsPage() {
             <Dialog.Root open={successDialogOpen} onOpenChange={setSuccessDialogOpen}>
                 <Dialog.Portal>
                     <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
-                    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-md z-50 mx-4">
+                    <Dialog.Content className="fixed top-1/2 left-0 right-0 mx-auto -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 lg:p-6 w-[90vw] max-w-md z-50 max-h-[90vh] overflow-y-auto">
                         <div className="text-center">
                             <div className="mx-auto flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
                                 <CheckCircle className="w-6 h-6 text-green-600" />
@@ -335,11 +336,11 @@ export default function LeadsPage() {
                             <Dialog.Title className="text-lg font-semibold text-gray-900 mb-2">
                                 Successfully Converted!
                             </Dialog.Title>
-                            <p className="text-gray-600 mb-6">
+                            <p className="text-gray-600 mb-6 text-sm lg:text-base">
                                 The lead has been successfully converted to a client with a new project set up and ready for onboarding.
                             </p>
                             <Dialog.Close asChild>
-                                <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                                <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors text-sm lg:text-base">
                                     Continue
                                 </button>
                             </Dialog.Close>
@@ -352,17 +353,17 @@ export default function LeadsPage() {
             <Dialog.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
                 <Dialog.Portal>
                     <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
-                    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-md z-50 mx-4">
+                    <Dialog.Content className="fixed top-1/2 left-0 right-0 mx-auto -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 lg:p-6 w-[90vw] max-w-md z-50 max-h-[90vh] overflow-y-auto">
                         <Dialog.Title className="text-lg font-semibold text-gray-900 mb-4">
                             Delete Lead
                         </Dialog.Title>
-                        <p className="text-gray-600 mb-6">
+                        <p className="text-gray-600 mb-6 text-sm lg:text-base">
                             Are you sure you want to delete "{leadToDelete ? getDisplayName(leadToDelete) : ''}"? This action cannot be undone.
                         </p>
-                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                        <div className="flex flex-col space-y-3 lg:flex-row lg:space-y-0 lg:space-x-3">
                             <Dialog.Close asChild>
                                 <button
-                                    className="w-full sm:flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50"
+                                    className="w-full lg:flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 text-sm lg:text-base"
                                     onClick={() => setLeadToDelete(null)}
                                     disabled={isDeleting}
                                 >
@@ -372,7 +373,7 @@ export default function LeadsPage() {
                             <button
                                 onClick={handleDelete}
                                 disabled={isDeleting}
-                                className="w-full sm:flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                                className="w-full lg:flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 text-sm lg:text-base"
                             >
                                 {isDeleting ? (
                                     <>

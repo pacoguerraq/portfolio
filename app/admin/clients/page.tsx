@@ -1,3 +1,4 @@
+// app/admin/clients/page.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -264,20 +265,20 @@ export default function ClientsPage() {
             <Dialog.Root open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
                 <Dialog.Portal>
                     <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
-                    <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-md z-50 mx-4">
+                    <Dialog.Content className="fixed top-1/2 left-0 right-0 mx-auto -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 lg:p-6 w-[90vw] sm:max-w-md z-50 max-h-[90vh] overflow-y-auto">
                         <Dialog.Title className="text-lg font-semibold text-gray-900 mb-4">
                             Delete Client
                         </Dialog.Title>
-                        <p className="text-gray-600 mb-4">
+                        <p className="text-gray-600 mb-4 text-sm lg:text-base">
                             Are you sure you want to delete "{clientToDelete ? getDisplayName(clientToDelete) : ''}"?
                         </p>
-                        <p className="text-sm text-red-600 mb-6">
+                        <p className="text-sm text-red-600 mb-6 bg-red-50 p-3 rounded-lg border border-red-200">
                             This will also delete their project and revert the original lead back to "Proposal Sent" status.
                         </p>
-                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                        <div className="flex flex-col space-y-2 lg:flex-row lg:space-y-0 lg:space-x-3">
                             <Dialog.Close asChild>
                                 <button
-                                    className="w-full sm:flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50"
+                                    className="w-full lg:flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 text-sm lg:text-base"
                                     onClick={() => setClientToDelete(null)}
                                     disabled={isDeleting}
                                 >
@@ -287,7 +288,7 @@ export default function ClientsPage() {
                             <button
                                 onClick={handleDelete}
                                 disabled={isDeleting}
-                                className="w-full sm:flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                                className="w-full lg:flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 text-sm lg:text-base"
                             >
                                 {isDeleting ? (
                                     <>

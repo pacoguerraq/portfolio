@@ -1,3 +1,4 @@
+// app/admin/projects/[id]/page.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -223,20 +224,20 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
             </div>
 
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                <div className="flex items-center space-x-4 min-w-0">
                     <button
                         onClick={() => router.back()}
-                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
                     >
                         <ArrowLeft className="w-5 h-5" />
                     </button>
-                    <div>
-                        <h1 className="text-2xl font-bold text-gray-900">{project.name}</h1>
-                        <p className="text-gray-600">Client: {getDisplayName()}</p>
+                    <div className="min-w-0">
+                        <h1 className="text-2xl font-bold text-gray-900 truncate">{project.name}</h1>
+                        <p className="text-gray-600 truncate">Client: {getDisplayName()}</p>
                     </div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
                     {editing ? (
                         <>
                             <button
@@ -254,7 +255,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                         googleDriveUrl: project.googleDriveUrl || '',
                                     })
                                 }}
-                                className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+                                className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors text-center"
                                 disabled={saving}
                             >
                                 Cancel
@@ -262,7 +263,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                             <button
                                 onClick={handleSave}
                                 disabled={saving}
-                                className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50"
+                                className="flex items-center justify-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50"
                             >
                                 {saving ? (
                                     <>
@@ -280,7 +281,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                     ) : (
                         <button
                             onClick={() => setEditing(true)}
-                            className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+                            className="flex items-center justify-center space-x-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
                         >
                             <Edit className="w-4 h-4" />
                             <span>Edit Project</span>
@@ -642,12 +643,12 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                 <Dialog.Root open={brandAssetModalOpen} onOpenChange={setBrandAssetModalOpen}>
                     <Dialog.Portal>
                         <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
-                        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-6 w-full max-w-2xl z-50 max-h-[90vh] overflow-y-auto mx-4">
+                        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 lg:p-6 w-full max-w-2xl z-50 max-h-[90vh] overflow-y-auto mx-4">
                             <div className="flex items-center justify-between mb-6">
-                                <Dialog.Title className="text-lg font-semibold text-gray-900">
+                                <Dialog.Title className="text-lg font-semibold text-gray-900 pr-4">
                                     Brand Assets Details
                                 </Dialog.Title>
-                                <Dialog.Close className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                                <Dialog.Close className="p-2 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0">
                                     <span className="sr-only">Close</span>
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -657,8 +658,8 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
 
                             <div className="space-y-6">
                                 {/* Status */}
-                                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                    <div>
+                                <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 bg-gray-50 rounded-lg space-y-3 lg:space-y-0">
+                                    <div className="flex-1">
                                         <h3 className="font-medium text-gray-900">Collection Status</h3>
                                         <p className="text-sm text-gray-600">Current state of brand asset collection</p>
                                     </div>
@@ -682,7 +683,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                     <div>
                                         <h3 className="font-medium text-gray-900 mb-2">Color Palette</h3>
                                         <div className="bg-gray-50 p-4 rounded-lg">
-                                            <p className="text-gray-900">{project.brandAsset.colorPalette}</p>
+                                            <p className="text-gray-900 text-sm lg:text-base break-words">{project.brandAsset.colorPalette}</p>
                                         </div>
                                     </div>
                                 )}
@@ -697,14 +698,14 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                             rel="noopener noreferrer"
                                             className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                                         >
-                                            <FileText className="w-5 h-5 text-blue-600" />
-                                            <div className="flex-1">
-                                                <p className="font-medium text-gray-900">
+                                            <FileText className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                                            <div className="flex-1 min-w-0">
+                                                <p className="font-medium text-gray-900 text-sm lg:text-base truncate">
                                                     {project.brandAsset.businessContentName || 'Business Content Document'}
                                                 </p>
                                                 <p className="text-sm text-gray-500">Click to view document</p>
                                             </div>
-                                            <ExternalLink className="w-4 h-4 text-gray-400" />
+                                            <ExternalLink className="w-4 h-4 text-gray-400 flex-shrink-0" />
                                         </a>
                                     </div>
                                 )}
@@ -731,18 +732,18 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                                 alert('Failed to update Google Drive Images URL')
                                             }
                                         }}
-                                        className="flex items-center space-x-2"
+                                        className="flex flex-col lg:flex-row items-stretch lg:items-center space-y-2 lg:space-y-0 lg:space-x-2"
                                     >
                                         <input
                                             type="url"
                                             name="googleDriveImagesUrl"
                                             defaultValue={project.brandAsset.googleDriveImagesUrl || ''}
                                             placeholder="https://drive.google.com/folder..."
-                                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+                                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black text-sm"
                                         />
                                         <button
                                             type="submit"
-                                            className="px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors"
+                                            className="px-4 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors"
                                         >
                                             Save
                                         </button>
@@ -754,12 +755,12 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                             rel="noopener noreferrer"
                                             className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors mt-2"
                                         >
-                                            <Palette className="w-5 h-5 text-green-600" />
-                                            <div className="flex-1">
-                                                <p className="font-medium text-gray-900">Images & Logo Assets</p>
+                                            <Palette className="w-5 h-5 text-green-600 flex-shrink-0" />
+                                            <div className="flex-1 min-w-0">
+                                                <p className="font-medium text-gray-900 text-sm lg:text-base">Images & Logo Assets</p>
                                                 <p className="text-sm text-gray-500">View client-uploaded media</p>
                                             </div>
-                                            <ExternalLink className="w-4 h-4 text-gray-400" />
+                                            <ExternalLink className="w-4 h-4 text-gray-400 flex-shrink-0" />
                                         </a>
                                     )}
                                 </div>
@@ -769,7 +770,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                     <div>
                                         <h3 className="font-medium text-gray-900 mb-2">Additional Comments</h3>
                                         <div className="bg-gray-50 p-4 rounded-lg">
-                                            <p className="text-gray-900">{project.brandAsset.additionalComments}</p>
+                                            <p className="text-gray-900 text-sm lg:text-base break-words leading-relaxed">{project.brandAsset.additionalComments}</p>
                                         </div>
                                     </div>
                                 )}
@@ -778,7 +779,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                 {project.brandAsset.submittedAt && (
                                     <div>
                                         <h3 className="font-medium text-gray-900 mb-2">Submission Date</h3>
-                                        <p className="text-gray-600">{new Date(project.brandAsset.submittedAt).toLocaleDateString('en-US', {
+                                        <p className="text-gray-600 text-sm lg:text-base">{new Date(project.brandAsset.submittedAt).toLocaleDateString('en-US', {
                                             year: 'numeric',
                                             month: 'long',
                                             day: 'numeric',
@@ -795,8 +796,8 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                         <p className="text-sm text-blue-800 mb-2">
                                             Share this link with your client to collect their brand assets:
                                         </p>
-                                        <div className="flex items-center space-x-2">
-                                            <code className="flex-1 bg-white px-3 py-2 rounded border text-sm">
+                                        <div className="flex flex-col lg:flex-row items-stretch lg:items-center space-y-2 lg:space-y-0 lg:space-x-2">
+                                            <code className="flex-1 bg-white px-3 py-2 rounded border text-xs lg:text-sm break-all">
                                                 {typeof window !== 'undefined' ? window.location.origin : ''}/client-portal/{project.id}
                                             </code>
                                             <button
@@ -814,8 +815,8 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                         {project.brandAsset.accessPassword && (
                                             <div className="mt-3 pt-3 border-t border-blue-200">
                                                 <p className="text-sm text-blue-800 mb-2">Client Portal Password:</p>
-                                                <div className="flex items-center space-x-2">
-                                                    <code className="flex-1 bg-white px-3 py-2 rounded border font-semibold text-green-700">
+                                                <div className="flex flex-col lg:flex-row items-stretch lg:items-center space-y-2 lg:space-y-0 lg:space-x-2">
+                                                    <code className="flex-1 bg-white px-3 py-2 rounded border font-semibold text-green-700 text-sm break-all">
                                                         {project.brandAsset.accessPassword}
                                                     </code>
                                                     <button
