@@ -47,7 +47,44 @@ const resources = [
         icon: Share2,
         color: 'bg-teal-500',
         category: 'SEO/Social'
-    }
+    },
+    // Internal PDF resources
+    {
+        id: 'paquetes',
+        title: 'Paquetes Pacoguerraq',
+        description: 'Información sobre los paquetes de servicios ofrecidos.',
+        url: `${process.env.NEXT_PUBLIC_HOST}/Paquetes-Pacoguerraq.pdf`,
+        icon: FolderOpen,
+        color: 'bg-pink-500',
+        category: 'Docs'
+    },
+    {
+        id: 'manual-empezar',
+        title: 'Manual para empezar proyecto',
+        description: 'Guía para iniciar un proyecto con Pacoguerraq.',
+        url: `${process.env.NEXT_PUBLIC_HOST}/Manual-para-empezar-proyecto-Pacoguerraq.pdf`,
+        icon: FolderOpen,
+        color: 'bg-yellow-500',
+        category: 'Docs'
+    },
+    {
+        id: 'manual-comprar-dominio',
+        title: 'Manual para comprar dominio',
+        description: 'Instrucciones para comprar un dominio para tu proyecto.',
+        url: `${process.env.NEXT_PUBLIC_HOST}/Manual-para-comprar-dominio-Pacoguerraq.pdf`,
+        icon: FolderOpen,
+        color: 'bg-lime-500',
+        category: 'Docs'
+    },
+    {
+        id: 'cv-francisco',
+        title: 'CV Francisco Javier Guerra Quintanilla',
+        description: 'Currículum Vitae de Francisco Javier Guerra Quintanilla en PDF.',
+        url: `${process.env.NEXT_PUBLIC_HOST}/CV_FranciscoJavierGuerraQuintanilla.pdf`,
+        icon: FolderOpen,
+        color: 'bg-gray-700',
+        category: 'Docs'
+    },
 ]
 
 export default function ResourcesPage() {
