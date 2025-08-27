@@ -1,3 +1,4 @@
+// app/admin/layout.tsx
 'use client'
 
 import { useState } from 'react'
@@ -12,7 +13,9 @@ import {
     MessageSquare,
     Code,
     Palette,
-    Home
+    Home,
+    ChevronLeft,
+    ChevronRight
 } from 'lucide-react'
 
 const adminMenuItems = [
@@ -66,6 +69,7 @@ export default function AdminLayout({
     children: React.ReactNode
 }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
     const router = useRouter()
     const pathname = usePathname()
 
@@ -128,18 +132,40 @@ export default function AdminLayout({
 
                 {/* Sidebar */}
                 <div className={`
-          fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out border-r border-gray-200
-          lg:top-16 lg:static lg:z-0
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-        `}>
+                    fixed inset-y-0 left-0 z-50 bg-white shadow-lg transform transition-all duration-300 ease-in-out border-r border-gray-200
+                    lg:top-16 lg:static lg:z-0
+                    ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+                    ${sidebarCollapsed ? 'lg:w-16' : 'lg:w-64'}
+                    w-64
+                `}>
                     <div className="flex flex-col h-full">
                         {/* Navigation */}
                         <nav className="flex-1 px-4 py-6 overflow-y-auto">
-                            <div className="mb-6">
-                                <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    Admin Tools
-                                </h3>
-                            </div>
+                            {!sidebarCollapsed && (
+                                <div className="mb-6 flex items-center justify-between">
+                                    <h3 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        Admin Tools
+                                    </h3>
+                                    <button
+                                        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                                        className="hidden lg:block p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                                        title="Collapse sidebar"
+                                    >
+                                        <ChevronLeft className="w-3.5 h-3.5" />
+                                    </button>
+                                </div>
+                            )}
+                            {sidebarCollapsed && (
+                                <div className="mb-6 flex justify-center">
+                                    <button
+                                        onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                                        className="hidden lg:block p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                                        title="Expand sidebar"
+                                    >
+                                        <ChevronRight className="w-3.5 h-3.5" />
+                                    </button>
+                                </div>
+                            )}
                             <div className="space-y-1">
                                 {adminMenuItems.map((item) => {
                                     const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href))
@@ -147,14 +173,18 @@ export default function AdminLayout({
                                         <Link
                                             key={item.href}
                                             href={item.href}
-                                            className={`group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors
+                                            className={`group flex items-center text-sm font-medium rounded-lg transition-colors
+                                                ${sidebarCollapsed ? 'px-3 py-3 justify-center' : 'px-3 py-2'}
                                                 ${isActive ? 'bg-gray-200 text-black font-semibold shadow' : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'}`}
                                             onClick={() => setSidebarOpen(false)}
+                                            title={sidebarCollapsed ? item.title : ''}
                                         >
-                                            <div className={`flex-shrink-0 w-6 h-6 rounded ${item.color} flex items-center justify-center mr-3`}>
+                                            <div className={`flex-shrink-0 w-6 h-6 rounded ${item.color} flex items-center justify-center ${sidebarCollapsed ? '' : 'mr-3'}`}>
                                                 <item.icon className="w-4 h-4 text-white" />
                                             </div>
-                                            {item.title}
+                                            {!sidebarCollapsed && (
+                                                <span>{item.title}</span>
+                                            )}
                                         </Link>
                                     )
                                 })}
@@ -169,6 +199,19 @@ export default function AdminLayout({
                             >
                                 <LogOut className="w-4 h-4 mr-3" />
                                 Logout
+                            </button>
+                        </div>
+
+                        {/* Desktop footer - collapsed logout */}
+                        <div className="hidden lg:block p-4 border-t border-gray-200">
+                            <button
+                                onClick={handleLogout}
+                                className={`flex items-center w-full text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors
+                                    ${sidebarCollapsed ? 'px-3 py-3 justify-center' : 'px-3 py-2'}`}
+                                title={sidebarCollapsed ? 'Logout' : ''}
+                            >
+                                <LogOut className={`w-4 h-4 ${sidebarCollapsed ? '' : 'mr-3'}`} />
+                                {!sidebarCollapsed && <span>Logout</span>}
                             </button>
                         </div>
                     </div>

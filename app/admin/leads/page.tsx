@@ -1,8 +1,8 @@
 // app/admin/leads/page.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Plus, Trash2, UserCheck, CheckCircle } from 'lucide-react'
+import { useState, useEffect, useMemo } from 'react'
+import { Plus, Trash2, UserCheck, CheckCircle, Search, Filter, SortAsc, SortDesc } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import LeadTable from '@/components/admin/LeadTable'
 import LeadFormModal from '@/components/admin/LeadFormModal'
@@ -22,6 +22,9 @@ type Lead = {
     updatedAt: string
 }
 
+type SortField = 'name' | 'status' | 'source' | 'createdAt'
+type SortDirection = 'asc' | 'desc'
+
 export default function LeadsPage() {
     const [leads, setLeads] = useState<Lead[]>([])
     const [loading, setLoading] = useState(true)
@@ -40,6 +43,13 @@ export default function LeadsPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
     const [isConverting, setIsConverting] = useState(false)
+
+    // Filters and Search
+    const [searchTerm, setSearchTerm] = useState('')
+    const [statusFilter, setStatusFilter] = useState<string>('all')
+    const [sourceFilter, setSourceFilter] = useState<string>('all')
+    const [sortField, setSortField] = useState<SortField>('createdAt')
+    const [sortDirection, setSortDirection] = useState<SortDirection>('desc')
 
     useEffect(() => {
         fetchLeads()
@@ -95,6 +105,85 @@ export default function LeadsPage() {
         } finally {
             setLoading(false)
         }
+    }
+
+    // Filtered and sorted leads
+    const filteredAndSortedLeads = useMemo(() => {
+        let filtered = leads
+
+        // Apply search filter
+        if (searchTerm) {
+            filtered = filtered.filter(lead => {
+                const searchableText = [
+                    lead.contactName,
+                    lead.businessName,
+                    lead.email,
+                    lead.phone,
+                    lead.contactNotes
+                ].filter(Boolean).join(' ').toLowerCase()
+                return searchableText.includes(searchTerm.toLowerCase())
+            })
+        }
+
+        // Apply status filter
+        if (statusFilter !== 'all') {
+            filtered = filtered.filter(lead => lead.status === statusFilter)
+        }
+
+        // Apply source filter
+        if (sourceFilter !== 'all') {
+            filtered = filtered.filter(lead => lead.source === sourceFilter)
+        }
+
+        // Apply sorting
+        filtered.sort((a, b) => {
+            let valueA: any
+            let valueB: any
+
+            switch (sortField) {
+                case 'name':
+                    valueA = (a.businessName || a.contactName || '').toLowerCase()
+                    valueB = (b.businessName || b.contactName || '').toLowerCase()
+                    break
+                case 'status':
+                    valueA = a.status
+                    valueB = b.status
+                    break
+                case 'source':
+                    valueA = a.source
+                    valueB = b.source
+                    break
+                case 'createdAt':
+                    valueA = new Date(a.createdAt)
+                    valueB = new Date(b.createdAt)
+                    break
+                default:
+                    return 0
+            }
+
+            if (valueA < valueB) return sortDirection === 'asc' ? -1 : 1
+            if (valueA > valueB) return sortDirection === 'asc' ? 1 : -1
+            return 0
+        })
+
+        return filtered
+    }, [leads, searchTerm, statusFilter, sourceFilter, sortField, sortDirection])
+
+    const handleSort = (field: SortField) => {
+        if (sortField === field) {
+            setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+        } else {
+            setSortField(field)
+            setSortDirection('asc')
+        }
+    }
+
+    const clearFilters = () => {
+        setSearchTerm('')
+        setStatusFilter('all')
+        setSourceFilter('all')
+        setSortField('createdAt')
+        setSortDirection('desc')
     }
 
     const handleDropdownOpen = (leadId: string, event: React.MouseEvent<HTMLButtonElement>) => {
@@ -230,6 +319,12 @@ export default function LeadsPage() {
         return lead.businessName || lead.contactName || 'Unnamed Lead'
     }
 
+    const activeFiltersCount = [
+        searchTerm,
+        statusFilter !== 'all' ? statusFilter : null,
+        sourceFilter !== 'all' ? sourceFilter : null
+    ].filter(Boolean).length
+
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
@@ -243,7 +338,14 @@ export default function LeadsPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Lead Management</h1>
-                    <p className="text-gray-600 mt-1">Track and manage potential clients</p>
+                    <p className="text-gray-600 mt-1">
+                        Track and manage potential clients
+                        {activeFiltersCount > 0 && (
+                            <span className="text-sm">
+                                {' '}• Showing {filteredAndSortedLeads.length} of {leads.length} leads
+                            </span>
+                        )}
+                    </p>
                 </div>
                 <button
                     onClick={() => setDialogOpen(true)}
@@ -254,8 +356,70 @@ export default function LeadsPage() {
                 </button>
             </div>
 
+            {/* Filters and Search */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+                <div className="flex flex-col lg:flex-row gap-4">
+                    {/* Search */}
+                    <div className="flex-1">
+                        <div className="relative">
+                            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder="Search leads by name, email, phone, or notes..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Status Filter */}
+                    <div className="min-w-[140px]">
+                        <select
+                            value={statusFilter}
+                            onChange={(e) => setStatusFilter(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                        >
+                            <option value="all">All Status</option>
+                            <option value="FOUND">Found</option>
+                            <option value="CONTACTED">Contacted</option>
+                            <option value="PROPOSAL_SENT">Proposal Sent</option>
+                            <option value="LOST">Lost</option>
+                        </select>
+                    </div>
+
+                    {/* Source Filter */}
+                    <div className="min-w-[140px]">
+                        <select
+                            value={sourceFilter}
+                            onChange={(e) => setSourceFilter(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                        >
+                            <option value="all">All Sources</option>
+                            <option value="INSTAGRAM">Instagram</option>
+                            <option value="LINKEDIN">LinkedIn</option>
+                            <option value="FACEBOOK">Facebook</option>
+                            <option value="GOOGLE_MAPS">Google Maps</option>
+                            <option value="REFERRAL">Referral</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+
+                    {/* Clear Filters */}
+                    {activeFiltersCount > 0 && (
+                        <button
+                            onClick={clearFilters}
+                            className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap"
+                        >
+                            <Filter className="w-4 h-4" />
+                            <span>Clear ({activeFiltersCount})</span>
+                        </button>
+                    )}
+                </div>
+            </div>
+
             <LeadTable
-                leads={leads}
+                leads={filteredAndSortedLeads}
                 onEdit={handleEdit}
                 onDelete={handleDeleteClick}
                 onConvertToClient={handleConvertToClient}
@@ -265,6 +429,9 @@ export default function LeadsPage() {
                 onDropdownOpen={handleDropdownOpen}
                 isDeleting={isDeleting}
                 isConverting={isConverting}
+                sortField={sortField}
+                sortDirection={sortDirection}
+                onSort={handleSort}
             />
 
             <LeadFormModal
@@ -447,7 +614,6 @@ export default function LeadsPage() {
                         <span>Edit</span>
                     </button>
 
-                    {/* Convert to Client option - always show for active leads */}
                     <button
                         className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-green-600 hover:bg-gray-50 text-left disabled:opacity-50 disabled:cursor-not-allowed"
                         onClick={() => {

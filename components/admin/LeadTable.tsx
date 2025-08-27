@@ -1,5 +1,6 @@
+// components/admin/LeadTable.tsx
 import { useState } from 'react'
-import { MoreHorizontal, Edit, Trash2, ExternalLink, UserCheck } from 'lucide-react'
+import { MoreHorizontal, Edit, Trash2, ExternalLink, UserCheck, SortAsc, SortDesc } from 'lucide-react'
 
 type Lead = {
     id: string
@@ -16,6 +17,9 @@ type Lead = {
     updatedAt: string
 }
 
+type SortField = 'name' | 'status' | 'source' | 'createdAt'
+type SortDirection = 'asc' | 'desc'
+
 interface LeadTableProps {
     leads: Lead[]
     onEdit: (lead: Lead) => void
@@ -27,6 +31,9 @@ interface LeadTableProps {
     onDropdownOpen: (leadId: string, event: React.MouseEvent<HTMLButtonElement>) => void
     isDeleting: boolean
     isConverting: boolean
+    sortField: SortField
+    sortDirection: SortDirection
+    onSort: (field: SortField) => void
 }
 
 const statusColors = {
@@ -57,6 +64,21 @@ const sourceLabels = {
 const projectTypeLabels = {
     STATIC_WEBSITE: 'Static Website',
     OTHER: 'Other',
+}
+
+const formatDate = (dateString: string) => {
+    // Create date object from UTC string and convert to Mexico timezone (UTC-6)
+    const date = new Date(dateString)
+
+    // Convert to Mexico timezone (America/Mexico_City)
+    const mexicoDate = new Date(date.toLocaleString("en-US", { timeZone: "America/Mexico_City" }))
+
+    // Format to DD/MMM/YY (e.g., 29/Aug/25)
+    const day = mexicoDate.getDate().toString().padStart(2, '0')
+    const month = mexicoDate.toLocaleDateString('en-US', { month: 'short' })
+    const year = mexicoDate.getFullYear().toString().slice(-2)
+
+    return `${day}/${month}/${year}`
 }
 
 const ContactTooltip = ({
@@ -116,6 +138,46 @@ const NotesTooltip = ({
     )
 }
 
+const SortableHeader = ({
+    field,
+    children,
+    sortField,
+    sortDirection,
+    onSort
+}: {
+    field: SortField
+    children: React.ReactNode
+    sortField: SortField
+    sortDirection: SortDirection
+    onSort: (field: SortField) => void
+}) => {
+    const isActive = sortField === field
+
+    return (
+        <th
+            className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors select-none"
+            onClick={() => onSort(field)}
+        >
+            <div className="flex items-center space-x-1">
+                <span>{children}</span>
+                <div className="flex flex-col">
+                    {isActive ? (
+                        sortDirection === 'asc' ? (
+                            <SortAsc className="w-3 h-3 text-gray-700" />
+                        ) : (
+                            <SortDesc className="w-3 h-3 text-gray-700" />
+                        )
+                    ) : (
+                        <div className="w-3 h-3 opacity-30">
+                            <SortAsc className="w-3 h-3" />
+                        </div>
+                    )}
+                </div>
+            </div>
+        </th>
+    )
+}
+
 export default function LeadTable({
     leads,
     onEdit,
@@ -126,7 +188,10 @@ export default function LeadTable({
     dropdownOpen,
     onDropdownOpen,
     isDeleting,
-    isConverting
+    isConverting,
+    sortField,
+    sortDirection,
+    onSort
 }: LeadTableProps) {
     const getDisplayName = (lead: Lead) => {
         return lead.businessName || lead.contactName || 'Unnamed Lead'
@@ -138,22 +203,47 @@ export default function LeadTable({
                 <table className="w-full">
                     <thead className="bg-gray-50 border-b border-gray-200">
                         <tr>
-                            <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <SortableHeader
+                                field="name"
+                                sortField={sortField}
+                                sortDirection={sortDirection}
+                                onSort={onSort}
+                            >
                                 Contact / Business
-                            </th>
-                            <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            </SortableHeader>
+                            <SortableHeader
+                                field="status"
+                                sortField={sortField}
+                                sortDirection={sortDirection}
+                                onSort={onSort}
+                            >
                                 Status
-                            </th>
-                            <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                                Source
-                            </th>
+                            </SortableHeader>
+                            <SortableHeader
+                                field="source"
+                                sortField={sortField}
+                                sortDirection={sortDirection}
+                                onSort={onSort}
+                            >
+                                <span className="hidden sm:inline">Source</span>
+                                <span className="sm:hidden">Src</span>
+                            </SortableHeader>
                             <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
                                 Project Type
                             </th>
+                            <SortableHeader
+                                field="createdAt"
+                                sortField={sortField}
+                                sortDirection={sortDirection}
+                                onSort={onSort}
+                            >
+                                <span className="hidden lg:inline">Date Added</span>
+                                <span className="lg:hidden">Date</span>
+                            </SortableHeader>
                             <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
                                 Notes
                             </th>
-                            <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                            <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden xl:table-cell">
                                 Proposal
                             </th>
                             <th className="px-4 lg:px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -164,39 +254,34 @@ export default function LeadTable({
                     <tbody className="bg-white divide-y divide-gray-200">
                         {leads.length === 0 ? (
                             <tr>
-                                <td colSpan={7} className="px-4 lg:px-6 py-8 text-center text-gray-500">
-                                    No leads found. Add your first lead to get started.
+                                <td colSpan={8} className="px-4 lg:px-6 py-12 text-center text-gray-500">
+                                    <div className="flex flex-col items-center space-y-2">
+                                        <div className="text-gray-400">
+                                            <UserCheck className="w-12 h-12 mx-auto mb-2" />
+                                        </div>
+                                        <p className="text-lg font-medium">No leads found</p>
+                                        <p className="text-sm">Try adjusting your filters or add your first lead to get started.</p>
+                                    </div>
                                 </td>
                             </tr>
                         ) : (
                             leads.map((lead) => (
-                                <tr key={lead.id} className="hover:bg-gray-50">
+                                <tr key={lead.id} className="hover:bg-gray-50 h-16">
                                     <td className="px-4 lg:px-6 py-4">
                                         <ContactTooltip
                                             lead={lead}
                                             onTooltipShow={onTooltipShow}
                                             tooltipOpen={tooltipOpen}
                                         >
-                                            <div>
-                                                <div className="font-medium text-gray-900">
+                                            <div className="flex flex-col justify-center h-full">
+                                                <div className="font-medium text-gray-900 truncate max-w-[200px]">
                                                     {getDisplayName(lead)}
                                                 </div>
                                                 {lead.contactName && lead.businessName && (
-                                                    <div className="text-sm text-gray-500">
+                                                    <div className="text-sm text-gray-500 truncate max-w-[200px]">
                                                         {lead.contactName}
                                                     </div>
                                                 )}
-                                                {/* Mobile: Show additional info */}
-                                                <div className="sm:hidden mt-1 space-y-1">
-                                                    <div className="text-xs text-gray-500">
-                                                        {sourceLabels[lead.source]}
-                                                    </div>
-                                                    {lead.projectType && (
-                                                        <div className="text-xs text-gray-500">
-                                                            {projectTypeLabels[lead.projectType]}
-                                                        </div>
-                                                    )}
-                                                </div>
                                             </div>
                                         </ContactTooltip>
                                     </td>
@@ -205,11 +290,18 @@ export default function LeadTable({
                                             {statusLabels[lead.status]}
                                         </span>
                                     </td>
-                                    <td className="px-4 lg:px-6 py-4 text-sm text-gray-900 hidden sm:table-cell">
-                                        {sourceLabels[lead.source]}
+                                    <td className="px-4 lg:px-6 py-4 text-sm text-gray-900">
+                                        <span className="hidden sm:inline">{sourceLabels[lead.source]}</span>
+                                        <span className="sm:hidden">{sourceLabels[lead.source].substring(0, 3)}</span>
                                     </td>
                                     <td className="px-4 lg:px-6 py-4 text-sm text-gray-900 hidden md:table-cell">
                                         {lead.projectType ? projectTypeLabels[lead.projectType] : '-'}
+                                    </td>
+                                    <td className="px-4 lg:px-6 py-4 text-sm text-gray-500">
+                                        <div className="flex flex-col justify-center h-full">
+                                            <span className="hidden sm:inline">{formatDate(lead.createdAt)}</span>
+                                            <span className="sm:hidden text-xs">{formatDate(lead.createdAt)}</span>
+                                        </div>
                                     </td>
                                     <td className="px-4 lg:px-6 py-4 hidden lg:table-cell">
                                         {lead.contactNotes ? (
@@ -219,7 +311,7 @@ export default function LeadTable({
                                                 onTooltipShow={onTooltipShow}
                                                 tooltipOpen={tooltipOpen}
                                             >
-                                                <div className="text-sm text-gray-900 max-w-xs truncate">
+                                                <div className="text-sm text-gray-900 max-w-[120px] truncate">
                                                     {lead.contactNotes}
                                                 </div>
                                             </NotesTooltip>
@@ -227,7 +319,7 @@ export default function LeadTable({
                                             <span className="text-gray-400">-</span>
                                         )}
                                     </td>
-                                    <td className="px-4 lg:px-6 py-4 hidden lg:table-cell text-center">
+                                    <td className="px-4 lg:px-6 py-4 hidden xl:table-cell text-center">
                                         {lead.proposalUrl ? (
                                             <a
                                                 href={lead.proposalUrl}
@@ -243,13 +335,16 @@ export default function LeadTable({
                                         )}
                                     </td>
                                     <td className="px-4 lg:px-6 py-4 text-right">
-                                        <button
-                                            onClick={(e) => onDropdownOpen(lead.id, e)}
-                                            disabled={isDeleting || isConverting}
-                                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                        >
-                                            <MoreHorizontal className="w-4 h-4" />
-                                        </button>
+                                        <div className="flex justify-end">
+                                            <button
+                                                onClick={(e) => onDropdownOpen(lead.id, e)}
+                                                disabled={isDeleting || isConverting}
+                                                className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                                title="More actions"
+                                            >
+                                                <MoreHorizontal className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))
