@@ -1,0 +1,174 @@
+{
+    "navbar": {
+        "aboutMe": "Sobre mí",
+        "services": "Servicios",
+        "myWork": "Mi trabajo",
+        "contactMe": "Contáctame",
+        "contact": "Contacto",
+        "menu": "Menú"
+    },
+    "header": {
+        "greeting": "¡Hola! Soy Francisco Guerra",
+        "title": {
+            "part1": "desarrollador de software",
+            "part2": "especializado en",
+            "part3": "escalables",
+            "part4": "soluciones web."
+        },
+        "description": "Soy un ingeniero de software apasionado por crear aplicaciones web dinámicas y eficientes. Con experiencia en desarrollo full-stack, trabajo con tecnologías modernas para crear soluciones digitales fluidas y de alto rendimiento.",
+        "buttons": {
+            "contactMe": "contáctame",
+            "myResume": "mi currículum"
+        },
+        "scrollToExplore": "Desplázate para explorar"
+    },
+    "about": {
+        "sectionTitle": "Introducción",
+        "title": "Sobre mí",
+        "description": "Soy un desarrollador de software con experiencia en tecnologías web modernas, computación en la nube e integraciones de API. He creado aplicaciones escalables y eficientes para diversas industrias, aprovechando AWS, Next.js y gestión de bases de datos.",
+        "infoList": {
+            "education": {
+                "title": "Educación",
+                "description": "Ingeniería en Tecnologías Computacionales (Ago 2020 - Jun 2024)"
+            },
+            "projects": {
+                "title": "Proyectos",
+                "description": "Aplicaciones web, plataformas de comercio electrónico y sistemas personalizados para empresas, mejorando la eficiencia y la experiencia del usuario"
+            }
+        },
+        "toolsSection": {
+            "title": "Herramientas que uso"
+        }
+    },
+    "services": {
+        "subtitle": "Lo que ofrezco",
+        "title": "Mis Servicios",
+        "description": "Soluciones web personalizadas, desde comercio electrónico hasta automatización empresarial, garantizando rendimiento y escalabilidad.",
+        "items": {
+            "web": {
+                "title": "Desarrollo Web Personalizado",
+                "description": "Construyo aplicaciones web rápidas, responsivas y escalables adaptadas a las necesidades de tu negocio, garantizando alto rendimiento y experiencia de usuario fluida."
+            },
+            "ecommerce": {
+                "title": "Soluciones de Comercio Electrónico",
+                "description": "Tiendas en línea seguras y eficientes con pasarelas de pago, gestión de inventario y una excelente experiencia de compra."
+            },
+            "business": {
+                "title": "Sistemas Empresariales Personalizados",
+                "description": "Creación de plataformas internas y herramientas de automatización para optimizar operaciones comerciales, desde gestión de pedidos hasta seguimiento de inventario."
+            },
+            "api": {
+                "title": "Desarrollo e Integración de APIs",
+                "description": "Diseño e implementación de APIs RESTful e integración de servicios de terceros para mejorar tu ecosistema digital."
+            }
+        }
+    },
+    "work": {
+        "subtitle": "Portafolio",
+        "title": "Mi Trabajo",
+        "description": "Una muestra de aplicaciones web y soluciones empresariales que he creado para clientes.",
+        "filters": {
+            "all": "Todos",
+            "static-website": "Sitios Web Estáticos",
+            "custom-platform": "Plataformas Personalizadas"
+        },
+        "buttons": {
+            "showLess": "Mostrar Menos",
+            "viewAll": "Ver Todos los Proyectos",
+            "viewProject": "Ver Proyecto",
+            "close": "Cerrar"
+        },
+        "labels": {
+            "inProgress": "En Progreso",
+            "technologies": "Tecnologías",
+            "viewProject": "Ver Proyecto"
+        },
+        "projects": {
+            "fyradrive": {
+                "type": "Plataforma de Venta de Vehículos",
+                "description": "Una plataforma para comprar y vender vehículos, con filtros de búsqueda avanzados, panel de administración y estadísticas."
+            },
+            "viaproposito": {
+                "type": "Sitio Web Personalizado",
+                "description": "Una plataforma para descubrir tu perfil personal y fortalezas a través de una prueba de autoevaluación personalizada rápida con resultados instantáneos."
+            },
+            "portfolio": {
+                "type": "Sitio Web Personal",
+                "description": "Diseñé y desarrollé mi portafolio para mostrar mis proyectos, experiencia y servicios."
+            },
+            "wtp": {
+                "type": "Tienda en Línea",
+                "description": "Construí una tienda en línea con procesamiento de pagos y autenticación segura."
+            },
+            "elpostre": {
+                "type": "Tienda en Línea",
+                "description": "Reconstruí la tienda en línea de una pastelería con Next.js, mejorando la experiencia de usuario y aumentando los pedidos en línea en un 25%."
+            },
+            "cassad": {
+                "type": "Sitio Web Personalizado",
+                "description": "Desarrollé un sitio web profesional para servicios legales e inmobiliarios, mejorando la presencia en línea."
+            },
+            "contagg": {
+                "type": "Plataforma de Dispositivos NFC",
+                "description": "Una plataforma para gestionar dispositivos NFC para compartir información personal, médica o de mascotas de forma segura, incluye activación de dispositivos, gestión de perfiles y análisis de escaneos."
+            },
+            "starts": {
+                "type": "Plataforma de Innovación Empresarial",
+                "description": "Plataforma colaborativa de innovación que transforma las ideas de los empleados en soluciones empresariales mediante gamificación, evaluación estructurada y análisis prácticos."
+            },
+            "unlid": {
+                "type": "Plataforma Inmobiliaria",
+                "description": "Una plataforma para publicar y solicitar propiedades inmobiliarias, con autenticación de usuarios, gestión de propiedades y capacidades de búsqueda avanzadas."
+            }
+        }
+    },
+    "contact": {
+        "subtitle": "Conectemos",
+        "title": "Ponte en Contacto",
+        "intro": {
+            "title": "Iniciemos una Conversación",
+            "description": "¿Listo para comenzar tu próximo proyecto? Hablemos sobre cómo puedo ayudar a dar vida a tus ideas con soluciones web modernas."
+        },
+        "form": {
+            "name": "Nombre Completo",
+            "namePlaceholder": "Tu nombre completo",
+            "email": "Correo Electrónico",
+            "emailPlaceholder": "tu.correo@ejemplo.com",
+            "message": "Mensaje",
+            "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+            "sending": "Enviando...",
+            "send": "Enviar Mensaje",
+            "success": "✓ ¡Mensaje enviado con éxito! Me pondré en contacto pronto.",
+            "error": "✗ Error al enviar el mensaje. Por favor, intenta de nuevo o contáctame directamente."
+        },
+        "contactMethods": {
+            "email": "Correo"
+        },
+        "social": {
+            "title": "Sígueme"
+        }
+    },
+    "footer": {
+        "description": "Desarrollador full-stack especializado en crear aplicaciones web modernas y soluciones empresariales. Construyamos algo increíble juntos.",
+        "getInTouch": "Ponte en contacto",
+        "quickLinks": "Enlaces Rápidos",
+        "connect": "Conéctate",
+        "links": {
+            "home": "Inicio",
+            "about": "Sobre mí",
+            "services": "Servicios",
+            "work": "Trabajo",
+            "contact": "Contacto"
+        },
+        "social": {
+            "github": "GitHub",
+            "githubDesc": "Ver mis repositorios de código",
+            "linkedin": "LinkedIn",
+            "linkedinDesc": "Conéctate conmigo profesionalmente",
+            "email": "Correo",
+            "emailDesc": "Envíame un mensaje"
+        },
+        "copyright": "© {year} Francisco Guerra. Todos los derechos reservados.",
+        "backToTop": "Volver arriba"
+    }
+}

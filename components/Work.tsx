@@ -1,9 +1,9 @@
-// components/Work.tsx
 'use client'
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { workData } from '@/assets/assets';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface Project {
     title: string;
@@ -23,6 +23,7 @@ const Work = () => {
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [showAllProjects, setShowAllProjects] = useState(false);
     const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
+    const { t } = useTranslation();
 
     // Sort projects: completed projects first, then in-progress projects at the end
     const sortedProjects = [...workData].sort((a, b) => {
@@ -40,9 +41,9 @@ const Work = () => {
     const displayedProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 4);
 
     const filterOptions = [
-        { key: 'all', label: 'All' },
-        { key: 'static-website', label: 'Static Websites' },
-        { key: 'custom-platform', label: 'Custom Platforms' },
+        { key: 'all', label: t('work.filters.all') },
+        { key: 'static-website', label: t('work.filters.static-website') },
+        { key: 'custom-platform', label: t('work.filters.custom-platform') },
     ] as const;
 
     useEffect(() => {
@@ -97,31 +98,26 @@ const Work = () => {
 
     return (
         <section id="work" className="min-h-screen py-20 relative overflow-hidden">
-            {/* Top Triangle Styling - Varied Shapes and Dark Gray Tones */}
+            {/* Top Triangle Styling */}
             <div className="absolute top-0 left-0 w-full h-40 overflow-hidden z-20">
-
-                {/* Triangle from right - overlapping */}
                 <div
                     className="absolute top-0 right-0 w-[40%] h-full bg-[#1a1b1b]"
                     style={{
                         clipPath: 'polygon(0 0%, 100% 0%, 100% 100%)'
                     }}
                 ></div>
-                {/* Triangle from left - largest */}
                 <div
                     className="absolute top-0 left-0 w-[70%] h-full bg-[#a9a9a9] opacity-55"
                     style={{
                         clipPath: 'polygon(0 0%, 100% 0%, 0 100%)'
                     }}
                 ></div>
-                {/* Triangle from left - medium, darker */}
                 <div
                     className="absolute top-0 left-0 w-[30%] h-full bg-[#555455]"
                     style={{
                         clipPath: 'polygon(0 0%, 100% 0%, 0 100%)'
                     }}
                 ></div>
-
             </div>
 
             {/* Simple Gradient Background */}
@@ -132,10 +128,10 @@ const Work = () => {
                 {/* Section Header */}
                 <div className={`text-center mb-16 transform transition-all duration-800 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                     }`}>
-                    <p className="text-sm text-gray-700 uppercase tracking-wide mb-3 font-medium">Portfolio</p>
-                    <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">My Work</h2>
+                    <p className="text-sm text-gray-700 uppercase tracking-wide mb-3 font-medium">{t('work.subtitle')}</p>
+                    <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-900">{t('work.title')}</h2>
                     <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                        A showcase of web applications and business solutions I've built for clients.
+                        {t('work.description')}
                     </p>
                     <div className="w-16 h-0.5 bg-gray-900 mx-auto mt-6"></div>
                 </div>
@@ -182,7 +178,7 @@ const Work = () => {
                                 {/* In Progress Badge */}
                                 {project.inProgress && (
                                     <div className="absolute top-3 right-3 bg-gray-900 text-white px-3 py-1 rounded-full text-xs font-medium shadow-lg">
-                                        In Progress
+                                        {t('work.labels.inProgress')}
                                     </div>
                                 )}
 
@@ -201,7 +197,7 @@ const Work = () => {
                             <div className="p-4">
                                 {/* Project Type */}
                                 <div className="mb-1">
-                                    <span className="text-xs text-gray-500 font-medium uppercase tracking-wide">{project.type}</span>
+                                    <span className="text-xs text-gray-500 font-medium uppercase tracking-wide">{t(project.type)}</span>
                                 </div>
 
                                 {/* Project Title */}
@@ -238,7 +234,7 @@ const Work = () => {
                             onClick={() => setShowAllProjects(!showAllProjects)}
                             className="inline-flex items-center gap-3 px-8 py-4 bg-gray-700 text-white rounded-xl font-medium hover:bg-gray-800 transition-all duration-300 hover:shadow-lg hover:shadow-gray-900/25 hover:-translate-y-1 group"
                         >
-                            <span>{showAllProjects ? 'Show Less' : `View All Projects (${filteredProjects.length})`}</span>
+                            <span>{showAllProjects ? t('work.buttons.showLess') : `${t('work.buttons.viewAll')} (${filteredProjects.length})`}</span>
                             <svg
                                 width="16"
                                 height="16"
@@ -288,7 +284,7 @@ const Work = () => {
                         {/* In Progress Badge - Always visible */}
                         {selectedProject.inProgress && (
                             <div className="absolute top-6 left-6 z-50 bg-gray-900 text-white px-3 py-1.5 rounded-full text-xs font-medium shadow-lg">
-                                In Progress
+                                {t('work.labels.inProgress')}
                             </div>
                         )}
 
@@ -309,7 +305,7 @@ const Work = () => {
                                 {/* Header */}
                                 <div className="px-8 pt-8 pb-4">
                                     {/* Project Type */}
-                                    <span className="text-xs text-gray-500 font-medium uppercase tracking-wide">{selectedProject.type}</span>
+                                    <span className="text-xs text-gray-500 font-medium uppercase tracking-wide">{t(selectedProject.type)}</span>
                                     {/* Project Title */}
                                     <h2 className="text-2xl font-bold text-gray-900 mt-1 mb-6">{selectedProject.title}</h2>
                                 </div>
@@ -318,13 +314,13 @@ const Work = () => {
                                     {/* Project Description */}
                                     <div className="mb-8">
                                         <p className="text-gray-700 leading-relaxed text-base">
-                                            {selectedProject.description}
+                                            {t(selectedProject.description)}
                                         </p>
                                     </div>
 
                                     {/* Tech Stack - Compact Design */}
                                     <div className="mb-8">
-                                        <h3 className="text-sm font-semibold text-gray-900 mb-3">Technologies</h3>
+                                        <h3 className="text-sm font-semibold text-gray-900 mb-3">{t('work.labels.technologies')}</h3>
                                         <div className="flex flex-wrap gap-1.5">
                                             {selectedProject.techStack.map((tech, index) => (
                                                 <span
@@ -344,7 +340,7 @@ const Work = () => {
                                                 onClick={() => openExternalLink(selectedProject.link)}
                                                 className="flex-1 bg-gray-900 text-white px-5 py-3 rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-gray-800 transition-all duration-300 hover:shadow-lg text-sm"
                                             >
-                                                <span>View Live Project</span>
+                                                <span>{t('work.buttons.viewProject')}</span>
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                     <path d="M7 17L17 7" />
                                                     <path d="M7 7h10v10" />
@@ -355,7 +351,7 @@ const Work = () => {
                                             onClick={closeModal}
                                             className="flex-1 bg-gray-100 text-gray-700 px-5 py-3 rounded-lg font-medium hover:bg-gray-200 transition-all duration-300 text-sm"
                                         >
-                                            Close
+                                            {t('work.buttons.close')}
                                         </button>
                                     </div>
                                 </div>

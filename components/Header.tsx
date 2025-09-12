@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import { Download } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/assets/assets';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const Header = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setIsVisible(true);
@@ -55,7 +57,7 @@ const Header = () => {
                     <div className={`mb-4 sm:mb-6 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                         }`}>
                         <p className="text-base md:text-lg lg:text-xl text-gray-600 font-medium">
-                            Hi! I'm Francisco Guerra
+                            {t('header.greeting')}
                             <span className="inline-block ml-2 animate-pulse">👋</span>
                         </p>
                     </div>
@@ -64,19 +66,19 @@ const Header = () => {
                     <div className={`mb-6 sm:mb-8 transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                         }`}>
                         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black max-w-5xl leading-tight">
-                            <span className="block">software developer</span>
+                            <span className="block">{t('header.title.part1')}</span>
                             <span className="block relative">
-                                specializing in
+                                {t('header.title.part2')}
                                 <span className="relative inline-block ml-2 sm:ml-4">
                                     <span className="bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent animate-pulse">
-                                        scalable
+                                        {t('header.title.part3')}
                                     </span>
                                     <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-black to-transparent transform origin-left scale-x-0 animate-[scaleX_1s_ease-out_2s_forwards]"></div>
                                 </span>
                             </span>
                             <span className="block mt-2">
                                 <span className="relative">
-                                    web solutions.
+                                    {t('header.title.part4')}
                                     <div className="absolute -bottom-1 sm:-bottom-2 left-0 w-16 sm:w-20 md:w-24 h-1 sm:h-1.5 bg-black transform origin-left scale-x-0 animate-[scaleX_1s_ease-out_2.5s_forwards]"></div>
                                 </span>
                             </span>
@@ -86,9 +88,7 @@ const Header = () => {
                     {/* Description */}
                     <div className={`mb-8 transform transition-all duration-1000 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
                         <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl leading-relaxed px-4">
-                            I am a software engineer passionate about building dynamic and efficient web applications.
-                            With experience in full-stack development, I work with modern technologies to create seamless,
-                            high-performance digital solutions.
+                            {t('header.description')}
                         </p>
                     </div>
 
@@ -99,7 +99,7 @@ const Header = () => {
                             onClick={scrollToContact}
                             className="w-full sm:w-auto bg-black text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium transition-all duration-300 hover:bg-gray-800 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-3 group text-sm sm:text-base"
                         >
-                            contact me
+                            {t('header.buttons.contactMe')}
                             <svg
                                 width="16"
                                 height="16"
@@ -118,7 +118,7 @@ const Header = () => {
                             onClick={downloadResume}
                             className="w-full sm:w-auto bg-transparent text-black border-2 border-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium transition-all duration-300 hover:bg-black hover:text-white hover:shadow-lg hover:scale-105 flex items-center justify-center gap-3 group text-sm sm:text-base"
                         >
-                            my resume
+                            {t('header.buttons.myResume')}
                             <Download
                                 size={16}
                                 className="transform group-hover:translate-y-1 transition-transform duration-300"
@@ -130,7 +130,7 @@ const Header = () => {
                     <div className={`mt-8 sm:mt-12 md:mt-16 lg:mt-20 transform transition-all duration-1000 delay-1100 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                         }`}>
                         <div className="flex flex-col items-center gap-2 text-gray-400">
-                            <span className="text-xs sm:text-sm font-medium">Scroll to explore</span>
+                            <span className="text-xs sm:text-sm font-medium">{t('header.scrollToExplore')}</span>
                             <div className="w-0.5 h-6 sm:h-8 bg-gray-300 animate-pulse"></div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ const Header = () => {
                 </div>
             </div>
 
-            {/* Enhanced Background decoration - More attractive and visible */}
+            {/* Background decoration */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
                 {/* Animated gradient background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-white to-gray-100/50"></div>

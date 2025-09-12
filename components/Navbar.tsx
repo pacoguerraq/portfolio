@@ -1,11 +1,14 @@
-'use client'
+'use client';
 
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -16,10 +19,10 @@ const Navbar = () => {
     }, []);
 
     const navItems = [
-        { name: 'About me', href: '#about' },
-        { name: 'Services', href: '#services' },
-        { name: 'My work', href: '#work' },
-        { name: 'Contact me', href: '#contact' },
+        { name: t('navbar.aboutMe'), href: '#about' },
+        { name: t('navbar.services'), href: '#services' },
+        { name: t('navbar.myWork'), href: '#work' },
+        { name: t('navbar.contactMe'), href: '#contact' },
     ];
 
     const scrollToSection = (href: string) => {
@@ -63,7 +66,9 @@ const Navbar = () => {
                         </div>
 
                         {/* Right side - varies by screen size */}
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-3">
+                            {/* Language Switcher - Always visible */}
+                            <LanguageSwitcher />
 
                             {/* Desktop Contact Button */}
                             <button
@@ -71,7 +76,7 @@ const Navbar = () => {
                                 className="hidden lg:flex group relative bg-black text-white px-6 py-2.5 rounded-full font-medium overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105 text-sm whitespace-nowrap"
                             >
                                 <span className="relative z-10 flex items-center gap-2">
-                                    Contact
+                                    {t('navbar.contact')}
                                     <svg
                                         width="14"
                                         height="14"
@@ -88,13 +93,13 @@ const Navbar = () => {
                                 <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </button>
 
-                            {/* Medium Contact Button (lg to xl) */}
+                            {/* Medium Contact Button (md to lg) */}
                             <button
                                 onClick={() => scrollToSection('#contact')}
                                 className="hidden md:flex lg:hidden group relative bg-black text-white px-5 py-2.5 rounded-full font-medium overflow-hidden transition-all duration-300 hover:shadow-lg hover:scale-105 text-sm whitespace-nowrap"
                             >
                                 <span className="relative z-10 flex items-center gap-2">
-                                    Contact
+                                    {t('navbar.contact')}
                                     <svg
                                         width="14"
                                         height="14"
@@ -138,7 +143,7 @@ const Navbar = () => {
                     }`}>
                     <div className="p-6 border-b border-gray-100">
                         <div className="flex items-center justify-between">
-                            <span className="text-xl font-bold text-black">Menu</span>
+                            <span className="text-xl font-bold text-black">{t('navbar.menu')}</span>
                             <button
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-300"
@@ -173,7 +178,7 @@ const Navbar = () => {
                                     animation: isMobileMenuOpen ? `slideInRight 0.3s ease-out ${navItems.length * 100}ms both` : 'none'
                                 }}
                             >
-                                Contact
+                                {t('navbar.contact')}
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M7 17L17 7" />
                                     <path d="M7 7h10v10" />

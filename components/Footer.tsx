@@ -1,12 +1,14 @@
-// components/Footer.tsx
 'use client'
 
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { assets } from '@/assets/assets';
 import FlowingLines from '@/components/FlowingLines';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function Footer() {
+    const { t } = useTranslation();
+
     const scrollToSection = (sectionId: string) => {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -17,34 +19,29 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     const quickLinks = [
-        { name: 'Home', id: 'top' },
-        { name: 'About', id: 'about' },
-        { name: 'Services', id: 'services' },
-        { name: 'Work', id: 'work' },
-        { name: 'Contact', id: 'contact' }
+        { name: t('footer.links.home'), id: 'top' },
+        { name: t('footer.links.about'), id: 'about' },
+        { name: t('footer.links.services'), id: 'services' },
+        { name: t('footer.links.work'), id: 'work' },
+        { name: t('footer.links.contact'), id: 'contact' }
     ];
 
     const socialLinks = [
         {
-            name: 'GitHub',
+            name: t('footer.social.github'),
             url: 'https://github.com/pacoguerraq',
-            description: 'View my code repositories'
+            description: t('footer.social.githubDesc')
         },
         {
-            name: 'LinkedIn',
+            name: t('footer.social.linkedin'),
             url: 'https://www.linkedin.com/in/franciscoguerraquintanilla/',
-            description: 'Connect with me professionally'
+            description: t('footer.social.linkedinDesc')
         },
         {
-            name: 'Email',
+            name: t('footer.social.email'),
             url: 'mailto:franciscoguerraquintanilla@gmail.com',
-            description: 'Send me a message'
-        },
-        // {
-        //     name: 'Website',
-        //     url: 'https://pacoguerraq.com',
-        //     description: 'Visit my portfolio'
-        // }
+            description: t('footer.social.emailDesc')
+        }
     ];
 
     return (
@@ -75,14 +72,13 @@ export default function Footer() {
                                 />
 
                                 <p className="text-gray-300 text-sm sm:text-base max-w-md leading-relaxed">
-                                    Full-stack developer specialized in creating modern web applications
-                                    and business solutions. Let's build something amazing together.
+                                    {t('footer.description')}
                                 </p>
                             </div>
 
                             <div className="space-y-2 sm:space-y-3">
                                 <h4 className="font-semibold text-white text-sm sm:text-base">
-                                    Get in touch
+                                    {t('footer.getInTouch')}
                                 </h4>
                                 <div className="space-y-2 text-gray-300">
                                     <p className="flex items-center space-x-2">
@@ -108,10 +104,10 @@ export default function Footer() {
                             className="space-y-4 sm:space-y-6"
                         >
                             <h4 className="font-semibold text-white text-sm sm:text-base">
-                                Quick Links
+                                {t('footer.quickLinks')}
                             </h4>
                             <nav className="space-y-2 sm:space-y-3">
-                                {quickLinks.map((link, index) => (
+                                {quickLinks.map((link) => (
                                     <motion.button
                                         key={link.id}
                                         onClick={() => scrollToSection(link.id)}
@@ -134,7 +130,7 @@ export default function Footer() {
                             className="space-y-4 sm:space-y-6"
                         >
                             <h4 className="font-semibold text-white text-sm sm:text-base">
-                                Connect
+                                {t('footer.connect')}
                             </h4>
                             <div className="space-y-2 sm:space-y-3">
                                 {socialLinks.map((social, index) => (
@@ -172,7 +168,7 @@ export default function Footer() {
                 >
                     <div className="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
                         <p className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
-                            © {currentYear} Francisco Guerra. All rights reserved.
+                            {t('footer.copyright').replace('{year}', currentYear.toString())}
                         </p>
 
                         <div className="flex items-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-400">
@@ -181,7 +177,7 @@ export default function Footer() {
                                 onClick={() => scrollToSection('header')}
                                 className="hover:text-white transition-colors duration-300 flex items-center space-x-1 sm:space-x-2"
                             >
-                                <span>Back to top</span>
+                                <span>{t('footer.backToTop')}</span>
                                 <Image
                                     src={assets.right_arrow_white}
                                     alt="Arrow up"

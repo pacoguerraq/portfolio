@@ -1,0 +1,174 @@
+{
+    "navbar": {
+        "aboutMe": "About me",
+        "services": "Services",
+        "myWork": "My work",
+        "contactMe": "Contact me",
+        "contact": "Contact",
+        "menu": "Menu"
+    },
+    "header": {
+        "greeting": "Hi! I'm Francisco Guerra",
+        "title": {
+            "part1": "software developer",
+            "part2": "specializing in",
+            "part3": "scalable",
+            "part4": "web solutions."
+        },
+        "description": "I am a software engineer passionate about building dynamic and efficient web applications. With experience in full-stack development, I work with modern technologies to create seamless, high-performance digital solutions.",
+        "buttons": {
+            "contactMe": "contact me",
+            "myResume": "my resume"
+        },
+        "scrollToExplore": "Scroll to explore"
+    },
+    "about": {
+        "sectionTitle": "Introduction",
+        "title": "About me",
+        "description": "I am a software developer with expertise in modern web technologies, cloud computing, and API integrations. I have built scalable and efficient applications for various industries, leveraging AWS, Next.js, and database management.",
+        "infoList": {
+            "education": {
+                "title": "Education",
+                "description": "B.S. Computer Science and Technology Engineering (Aug 2020 - Jun 2024)"
+            },
+            "projects": {
+                "title": "Projects",
+                "description": "Web applications, e-commerce platforms, and custom systems for businesses, improving efficiency and user experience"
+            }
+        },
+        "toolsSection": {
+            "title": "Tools I use"
+        }
+    },
+    "services": {
+        "subtitle": "What I offer",
+        "title": "My Services",
+        "description": "Custom web solutions, from e-commerce to business automation, ensuring performance and scalability.",
+        "items": {
+            "web": {
+                "title": "Custom Web Development",
+                "description": "I build fast, responsive, and scalable web applications tailored to your business needs, ensuring high performance and seamless user experience."
+            },
+            "ecommerce": {
+                "title": "E-Commerce Solutions",
+                "description": "Secure and efficient online stores with payment gateways, inventory management, and a great shopping experience."
+            },
+            "business": {
+                "title": "Custom Business Systems",
+                "description": "Creating internal platforms and automation tools to streamline business operations, from order management to inventory tracking."
+            },
+            "api": {
+                "title": "API Development & Integration",
+                "description": "Designing and implementing RESTful APIs and integrating third-party services to enhance your digital ecosystem."
+            }
+        }
+    },
+    "work": {
+        "subtitle": "Portfolio",
+        "title": "My Work",
+        "description": "A showcase of web applications and business solutions I've built for clients.",
+        "filters": {
+            "all": "All",
+            "static-website": "Static Websites",
+            "custom-platform": "Custom Platforms"
+        },
+        "buttons": {
+            "showLess": "Show Less",
+            "viewAll": "View All Projects",
+            "viewProject": "View Live Project",
+            "close": "Close"
+        },
+        "labels": {
+            "inProgress": "In Progress",
+            "technologies": "Technologies",
+            "viewProject": "View Project"
+        },
+        "projects": {
+            "fyradrive": {
+                "type": "Vehicle Seller Platform",
+                "description": "A platform for buying and selling vehicles, featuring advanced search filters, admin dashboard, and statistics."
+            },
+            "viaproposito": {
+                "type": "Custom Website",
+                "description": "A platform to discover your personal profile and strengths through a quick, personalized self-assessment test with instant results."
+            },
+            "portfolio": {
+                "type": "Personal Website",
+                "description": "Designed and developed my portfolio to showcase my projects, experience, and services."
+            },
+            "wtp": {
+                "type": "E-Commerce Website",
+                "description": "Built an online store with payment processing and secure authentication."
+            },
+            "elpostre": {
+                "type": "E-Commerce Website",
+                "description": "Rebuilt a bakery's online store with Next.js, improving UX and boosting online orders by 25%."
+            },
+            "cassad": {
+                "type": "Custom Website",
+                "description": "Developed a professional website for legal and real estate services, enhancing online presence."
+            },
+            "contagg": {
+                "type": "NFC Devices Platform",
+                "description": "A platform to manage NFC devices for sharing personal, medical, or pet info securely—includes device activation, profile management, and scan analytics."
+            },
+            "starts": {
+                "type": "Business Innovation Platform",
+                "description": "Collaborative innovation platform that transforms employee ideas into business solutions using gamification, structured evaluation, and actionable analytics."
+            },
+            "unlid": {
+                "type": "Real Estate Platform",
+                "description": "A platform for posting and requesting real estate properties, featuring user authentication, property management, and advanced search capabilities."
+            }
+        }
+    },
+    "contact": {
+        "subtitle": "Let's Connect",
+        "title": "Get In Touch",
+        "intro": {
+            "title": "Let's Start a Conversation",
+            "description": "Ready to start your next project? Let's discuss how I can help bring your ideas to life with modern web solutions."
+        },
+        "form": {
+            "name": "Full Name",
+            "namePlaceholder": "Your full name",
+            "email": "Email Address",
+            "emailPlaceholder": "your.email@example.com",
+            "message": "Message",
+            "messagePlaceholder": "Tell me about your project...",
+            "sending": "Sending...",
+            "send": "Send Message",
+            "success": "✓ Message sent successfully! I'll get back to you soon.",
+            "error": "✗ Failed to send message. Please try again or contact me directly."
+        },
+        "contactMethods": {
+            "email": "Email"
+        },
+        "social": {
+            "title": "Follow Me"
+        }
+    },
+    "footer": {
+        "description": "Full-stack developer specialized in creating modern web applications and business solutions. Let's build something amazing together.",
+        "getInTouch": "Get in touch",
+        "quickLinks": "Quick Links",
+        "connect": "Connect",
+        "links": {
+            "home": "Home",
+            "about": "About",
+            "services": "Services",
+            "work": "Work",
+            "contact": "Contact"
+        },
+        "social": {
+            "github": "GitHub",
+            "githubDesc": "View my code repositories",
+            "linkedin": "LinkedIn",
+            "linkedinDesc": "Connect with me professionally",
+            "email": "Email",
+            "emailDesc": "Send me a message"
+        },
+        "copyright": "© {year} Francisco Guerra. All rights reserved.",
+        "backToTop": "Back to top"
+    }
+}

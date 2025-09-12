@@ -1,12 +1,13 @@
-// components/Services.tsx
 'use client'
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { serviceData } from '@/assets/assets';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const Services = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -37,10 +38,10 @@ const Services = () => {
                 {/* Section Header */}
                 <div className={`text-center mb-16 transform transition-all ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                     }`}>
-                    <p className="text-sm text-gray-600 uppercase tracking-wide mb-3">What I offer</p>
-                    <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-black">My Services</h2>
+                    <p className="text-sm text-gray-600 uppercase tracking-wide mb-3">{t('services.subtitle')}</p>
+                    <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-black">{t('services.title')}</h2>
                     <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
-                        Custom web solutions, from e-commerce to business automation, ensuring performance and scalability.
+                        {t('services.description')}
                     </p>
                     <div className="w-16 h-0.5 bg-black mx-auto mt-6"></div>
                 </div>
@@ -52,16 +53,13 @@ const Services = () => {
                             key={index}
                             className={`relative bg-white border border-gray-200 rounded-2xl p-8 cursor-pointer group transform hover:shadow-2xl hover:scale-105 hover:border-gray-300 hover:-translate-y-2 transition-all ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                                 }`}
-                            style={{
-                                // transitionDelay: isVisible ? `${200 + index * 100}ms` : '0ms'
-                            }}
                         >
                             {/* Service Icon */}
                             <div className="mb-6">
                                 <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center shadow-lg cursor-pointer transition-all group-hover:scale-110 group-hover:rotate-3">
                                     <Image
                                         src={service.icon}
-                                        alt={service.title}
+                                        alt={t(service.title)}
                                         width={28}
                                         height={28}
                                         className="w-7 h-7"
@@ -72,10 +70,10 @@ const Services = () => {
                             {/* Service Content */}
                             <div>
                                 <h3 className="text-xl font-bold text-black mb-4 leading-tight cursor-pointer transition-colors group-hover:text-gray-800">
-                                    {service.title}
+                                    {t(service.title)}
                                 </h3>
                                 <p className="text-base text-gray-600 leading-relaxed">
-                                    {service.description}
+                                    {t(service.description)}
                                 </p>
                             </div>
 
@@ -84,10 +82,9 @@ const Services = () => {
                         </div>
                     ))}
                 </div>
-
             </div>
 
-            {/* Enhanced Background Styling */}
+            {/* Background styling */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 {/* Larger geometric elements */}
                 <div className="absolute top-20 left-20 w-32 h-32 border-2 border-gray-300 rounded-full opacity-20"></div>
@@ -109,31 +106,26 @@ const Services = () => {
                 }}></div>
             </div>
 
-            {/* Bottom Triangle Styling - Varied Shapes and Dark Gray Tones */}
+            {/* Bottom Triangle Styling */}
             <div className="absolute bottom-0 left-0 w-full h-40 overflow-hidden">
-
-                {/* Triangle from right - overlapping */}
                 <div
                     className="absolute bottom-0 right-0 w-[40%] h-full bg-[#1a1b1b]"
                     style={{
                         clipPath: 'polygon(0 100%, 100% 100%, 100% 0)'
                     }}
                 ></div>
-                {/* Triangle from left - largest */}
                 <div
                     className="absolute bottom-0 left-0 w-[70%] h-full bg-[#a9a9a9] opacity-55"
                     style={{
                         clipPath: 'polygon(0 100%, 100% 100%, 0 0)'
                     }}
                 ></div>
-                {/* Triangle from left - medium, darker */}
                 <div
                     className="absolute bottom-0 left-0 w-[30%] h-full bg-[#555455]"
                     style={{
                         clipPath: 'polygon(0 100%, 100% 100%, 0 0)'
                     }}
                 ></div>
-
             </div>
         </section>
     );

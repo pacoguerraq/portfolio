@@ -52,6 +52,17 @@ import claude from './media/claude.png';
 import github from './media/github.png';
 import { StaticImageData } from 'next/image';
 
+interface WorkItem {
+    title: string;
+    type: string;
+    category: 'static-website' | 'custom-platform';
+    inProgress?: boolean;
+    description: string; // This will now store a translation key
+    techStack: string[];
+    bgImage: string;
+    link: string;
+}
+
 interface Assets {
     user_image: StaticImageData;
     code_icon: StaticImageData;
@@ -192,29 +203,29 @@ interface ServiceItem {
 export const serviceData: ServiceItem[] = [
     {
         icon: assets.web_icon,
-        title: 'Custom Web Development',
-        description: 'I build fast, responsive, and scalable web applications tailored to your business needs, ensuring high performance and seamless user experience.',
+        title: 'services.items.web.title',
+        description: 'services.items.web.description',
         link: ''
     },
     {
         icon: assets.ui_icon,
-        title: 'E-Commerce Solutions',
-        description: 'Secure and efficient online stores with payment gateways, inventory management, and a great shopping experience.',
+        title: 'services.items.ecommerce.title',
+        description: 'services.items.ecommerce.description',
         link: ''
     },
     {
         icon: assets.mobile_icon,
-        title: 'Custom Business Systems',
-        description: 'Creating internal platforms and automation tools to streamline business operations, from order management to inventory tracking.',
+        title: 'services.items.business.title',
+        description: 'services.items.business.description',
         link: ''
     },
     {
         icon: assets.graphics_icon,
-        title: 'API Development & Integration',
-        description: 'Designing and implementing RESTful APIs and integrating third-party services to enhance your digital ecosystem.',
+        title: 'services.items.api.title',
+        description: 'services.items.api.description',
         link: ''
     },
-]
+];
 
 interface WorkItem {
     title: string;
@@ -230,108 +241,90 @@ interface WorkItem {
 export const workData: WorkItem[] = [
     {
         title: 'Fyradrive',
-        type: 'Vehicle Seller Platform',
+        type: 'work.projects.fyradrive.type',
         category: 'custom-platform',
-        description: 'A platform for buying and selling vehicles, featuring advanced search filters, admin dashboard, and statistics.',
+        description: 'work.projects.fyradrive.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Motion'],
         bgImage: '/fyradrive.png',
         link: "https://fyradrive.com/",
     },
     {
         title: 'Vía Propósito',
-        type: 'Custom Website',
+        type: 'work.projects.viaproposito.type',
         category: 'custom-platform',
         inProgress: false,
-        description: 'A platform to discover your personal profile and strengths through a quick, personalized self-assessment test with instant results.',
+        description: 'work.projects.viaproposito.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Next-Auth', 'Nodemailer'],
         bgImage: '/viaproposito.png',
         link: "https://viaproposito.vercel.app/"
     },
     {
         title: 'Portfolio Site',
-        type: 'Personal Website',
+        type: 'work.projects.portfolio.type',
         category: 'static-website',
-        description: 'Designed and developed my portfolio to showcase my projects, experience, and services.',
+        description: 'work.projects.portfolio.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vercel', 'Motion', 'Web3Forms'],
         bgImage: '/pacoguerraq.png',
         link: "https://www.pacoguerraq.com/",
     },
     {
         title: 'We The People',
-        type: 'E-Commerce Website',
+        type: 'work.projects.wtp.type',
         category: 'custom-platform',
-        description: 'Built an online store with payment processing and secure authentication.',
+        description: 'work.projects.wtp.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
         bgImage: '/wethepeople.png',
         link: "https://www.wethepeoplewear.com.mx/",
     },
     {
         title: 'Pastelería El Postre',
-        type: 'E-Commerce Website',
+        type: 'work.projects.elpostre.type',
         category: 'custom-platform',
-        description: "Rebuilt a bakery's online store with Next.js, improving UX and boosting online orders by 25%.",
+        description: 'work.projects.elpostre.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
         bgImage: '/elpostre.png',
         link: "https://www.elpostre.com.mx/",
     },
-    // {
-    //     title: 'Galería del Dulce',
-    //     type: "Order Management System",
-    //     category: 'custom-platform',
-    //     description: 'Developed a real-time order processing platform, integrating iPos API for automated inventory updates.',
-    //     techStack: ['Next.js', 'Tailwind CSS', 'Vercel', 'iPos API'],
-    //     bgImage: '/galeriadeldulce.png',
-    //     link: "https://galeria-del-dulce.vercel.app/",
-    // },
     {
         title: 'Cassad',
-        type: 'Custom Website',
+        type: 'work.projects.cassad.type',
         category: 'static-website',
-        description: 'Developed a professional website for legal and real estate services, enhancing online presence.',
+        description: 'work.projects.cassad.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vercel'],
         bgImage: '/cassad.png',
         link: "https://cassad.vercel.app/",
     },
     {
         title: 'ConTagg',
-        type: 'NFC Devices Platform',
+        type: 'work.projects.contagg.type',
         category: 'custom-platform',
         inProgress: true,
-        description: 'A platform to manage NFC devices for sharing personal, medical, or pet info securely—includes device activation, profile management, and scan analytics.',
+        description: 'work.projects.contagg.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
         bgImage: '/contagg.png',
         link: "https://contagg.vercel.app/",
     },
     {
         title: 'STARTS',
-        type: 'Business Innovation Platform',
+        type: 'work.projects.starts.type',
         category: 'custom-platform',
         inProgress: true,
-        description: 'Collaborative innovation platform that transforms employee ideas into business solutions using gamification, structured evaluation, and actionable analytics.',
+        description: 'work.projects.starts.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'AWS Cognito', 'AWS RDS Postgres', 'AWS S3', 'AWS Lambda', 'AWS API Gateway'],
         bgImage: '/starts.png',
         link: "https://starts-nu.vercel.app/"
     },
     {
         title: 'Unlid',
-        type: 'Real Estate Platform',
+        type: 'work.projects.unlid.type',
         category: 'custom-platform',
         inProgress: true,
-        description: 'A platform for posting and requesting real estate properties, featuring user authentication, property management, and advanced search capabilities.',
+        description: 'work.projects.unlid.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
         bgImage: '/unlid.png',
         link: "https://www.unlid.com.mx/"
-    },
-    // {
-    //     title: 'Order Registration Platform',
-    //     type: 'Custom Business System',
-    //     category: 'custom-platform',
-    //     description: 'Created a system for local businesses to register and print orders efficiently, reducing errors and improving workflow.',
-    //     techStack: ['Vue.js', 'Node.js', 'Express.js', 'Knex.js', 'Objection.js', 'PostgreSQL', 'Bcrypt', 'Celebrate'],
-    //     bgImage: '/work-4.png',
-    //     link: "",
-    // },
-]
+    }
+];
 
 interface ToolItem {
     name: string;
@@ -395,11 +388,6 @@ export const toolsData: ToolItem[] = [
         icon: assets.postgres,
         darkIcon: assets.postgres
     },
-    // {
-    //     name: 'AWS DynamoDB (NoSQL)',
-    //     icon: assets.dynamodb,
-    //     darkIcon: assets.dynamodb
-    // },
     {
         name: 'Claude AI',
         icon: assets.claude,

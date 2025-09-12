@@ -1,3 +1,4 @@
+// app/client-portal/[projectId]/page.tsx
 'use client'
 
 import { useState, useEffect } from 'react'

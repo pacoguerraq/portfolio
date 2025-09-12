@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Outfit } from "next/font/google";
+import { LanguageProvider } from "@/providers/LanguageProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -31,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${outfit.variable} antialiased overflow-x-hidden bg-white text-gray-900`}>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
