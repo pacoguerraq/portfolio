@@ -41,7 +41,8 @@ type Project = {
         additionalComments: string | null
         accessPassword: string | null
         isCompleted: boolean
-        submittedAt: string | null
+        submittedAt: string | null,
+        updatedAt: string
     } | null
 }
 
@@ -606,10 +607,10 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                     )}
                                 </div>
 
-                                {project.brandAsset.submittedAt && (
+                                {project.brandAsset.updatedAt && (
                                     <div className="flex items-center justify-between">
-                                        <span className="text-sm font-medium text-gray-500">Submitted</span>
-                                        <span className="text-sm text-gray-900">{new Date(project.brandAsset.submittedAt).toLocaleDateString()}</span>
+                                        <span className="text-sm font-medium text-gray-500">Updated</span>
+                                        <span className="text-sm text-gray-900">{new Date(project.brandAsset.updatedAt).toLocaleDateString()}</span>
                                     </div>
                                 )}
 
@@ -643,7 +644,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                 <Dialog.Root open={brandAssetModalOpen} onOpenChange={setBrandAssetModalOpen}>
                     <Dialog.Portal>
                         <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-50 z-50" />
-                        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 lg:p-6 w-full max-w-2xl z-50 max-h-[90vh] overflow-y-auto mx-4">
+                        <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl shadow-xl p-4 lg:p-6 w-[calc(100%-2rem)] max-w-2xl z-50 max-h-[90vh] overflow-y-auto">
                             <div className="flex items-center justify-between mb-6">
                                 <Dialog.Title className="text-lg font-semibold text-gray-900 pr-4">
                                     Brand Assets Details
@@ -654,9 +655,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </Dialog.Close>
-                            </div>
-
-                            <div className="space-y-6">
+                            </div>                            <div className="space-y-6">
                                 {/* Status */}
                                 <div className="flex flex-col lg:flex-row lg:items-center justify-between p-4 bg-gray-50 rounded-lg space-y-3 lg:space-y-0">
                                     <div className="flex-1">
@@ -683,7 +682,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                     <div>
                                         <h3 className="font-medium text-gray-900 mb-2">Color Palette</h3>
                                         <div className="bg-gray-50 p-4 rounded-lg">
-                                            <p className="text-gray-900 text-sm lg:text-base break-words">{project.brandAsset.colorPalette}</p>
+                                            <p className="text-gray-900 text-sm lg:text-base break-words whitespace-pre-wrap">{project.brandAsset.colorPalette}</p>
                                         </div>
                                     </div>
                                 )}
@@ -743,7 +742,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                         />
                                         <button
                                             type="submit"
-                                            className="px-4 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors"
+                                            className="px-4 py-2 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition-colors w-full lg:w-auto"
                                         >
                                             Save
                                         </button>
@@ -776,10 +775,10 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                 )}
 
                                 {/* Submission Date */}
-                                {project.brandAsset.submittedAt && (
+                                {project.brandAsset.updatedAt && (
                                     <div>
-                                        <h3 className="font-medium text-gray-900 mb-2">Submission Date</h3>
-                                        <p className="text-gray-600 text-sm lg:text-base">{new Date(project.brandAsset.submittedAt).toLocaleDateString('en-US', {
+                                        <h3 className="font-medium text-gray-900 mb-2">Updated Date</h3>
+                                        <p className="text-gray-600 text-sm lg:text-base">{new Date(project.brandAsset.updatedAt).toLocaleDateString('en-US', {
                                             year: 'numeric',
                                             month: 'long',
                                             day: 'numeric',
@@ -806,7 +805,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                                         navigator.clipboard.writeText(`${window.location.origin}/client-portal/${project.id}`)
                                                     }
                                                 }}
-                                                className="px-3 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors"
+                                                className="px-3 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors w-full lg:w-auto"
                                             >
                                                 Copy
                                             </button>
@@ -825,7 +824,7 @@ export default function ProjectDetailsPage({ params }: { params: Promise<{ id: s
                                                                 navigator.clipboard.writeText(project.brandAsset.accessPassword)
                                                             }
                                                         }}
-                                                        className="px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors"
+                                                        className="px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors w-full lg:w-auto"
                                                     >
                                                         Copy
                                                     </button>
