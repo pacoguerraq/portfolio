@@ -170,5 +170,67 @@
         },
         "copyright": "© {year} Francisco Guerra. Todos los derechos reservados.",
         "backToTop": "Volver arriba"
+    },
+    "clientPortal": {
+        "navbar": {
+            "title": "Portal de Recursos de Marca",
+            "securePortal": "Portal Seguro"
+        },
+        "login": {
+            "title": "Portal de Recursos de Marca",
+            "subtitle": "Ingresa la contraseña proporcionada por tu gestor de proyecto",
+            "passwordLabel": "Contraseña de Acceso",
+            "passwordPlaceholder": "Ingresa la contraseña",
+            "buttonText": "Acceder al Portal",
+            "verifying": "Verificando...",
+            "helpText": "¿Necesitas ayuda? Contacta a tu gestor de proyecto para asistencia."
+        },
+        "success": {
+            "title": "¡Enviado con Éxito!",
+            "message": "Gracias por proporcionar tus recursos de marca. Tu gestor de proyecto revisará la información y se pondrá en contacto contigo pronto.",
+            "project": "Proyecto"
+        },
+        "form": {
+            "title": "Recopilación de Recursos de Marca para",
+            "welcome": {
+                "title": "Bienvenido a Tu Portal de Recursos de Marca",
+                "description": "Por favor, proporciona la siguiente información para ayudarnos a crear tu sitio web perfecto. Todos los campos son opcionales, pero cuanta más información proporciones, mejor podremos servirte."
+            },
+            "colorPalette": {
+                "title": "Paleta de Colores",
+                "label": "Colores de Marca (Requerido)",
+                "placeholder": "Por favor describe los colores de tu marca. Puedes incluir:&#10;• Códigos hex (ej., #FF5733, #33A1FF)&#10;• Nombres de colores (ej., Azul marino, Naranja cálido)&#10;• Preferencias de color o ambiente (ej., Profesional, Moderno, Vibrante)",
+                "helpText": "Ayúdanos a entender la identidad de color de tu marca"
+            },
+            "businessContent": {
+                "title": "Contenido de Negocio",
+                "label": "Documento de Descripción de Negocio (Requerido)",
+                "uploadedFile": "✓ Archivo subido:",
+                "remove": "Eliminar",
+                "important": "Importante",
+                "importantText": "Este documento se utilizará para generar los textos de tu sitio web utilizando tecnología de IA. Por favor, incluye información detallada sobre tu negocio, servicios, público objetivo y cualquier mensaje específico que te gustaría transmitir.",
+                "helpText": "Sube un documento con la descripción de tu negocio, servicios, público objetivo, etc."
+            },
+            "mediaAssets": {
+                "title": "Imágenes y Recursos Multimedia",
+                "label": "Sube Tus Recursos Multimedia",
+                "folderInstructions": "Por favor, sube tus logotipos, imágenes y otros recursos multimedia a esta carpeta compartida:",
+                "openFolder": "Abrir Carpeta de Subida",
+                "confirmationLabel": "He subido mis recursos multimedia a la carpeta proporcionada",
+                "noFolderMessage": "El enlace de la carpeta de subida aún no se ha configurado. Por favor, contacta a tu gestor de proyecto para las instrucciones de subida de recursos.",
+                "helpText": "Incluye tus logotipos, imágenes de productos, fotos del equipo y cualquier otro recurso visual para tu sitio web"
+            },
+            "additionalInfo": {
+                "title": "Información Adicional",
+                "label": "Comentarios y Solicitudes Especiales",
+                "placeholder": "Cualquier información adicional, solicitudes especiales o preferencias que te gustaría que conociéramos...",
+                "helpText": "Comparte cualquier otro detalle que nos ayude a crear tu sitio web perfecto"
+            },
+            "submit": {
+                "button": "Enviar Recursos de Marca",
+                "submitting": "Enviando...",
+                "helpText": "Una vez enviado, tu gestor de proyecto revisará la información y se pondrá en contacto contigo"
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+// components/LanguageSwitcher.tsx (for navbar)
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -24,8 +25,8 @@ const LanguageSwitcher = () => {
     }, []);
 
     const languages = [
-        { code: 'en', name: 'EN', flag: '🇺🇸' },
-        { code: 'es', name: 'ES', flag: '🇲🇽' },
+        { code: 'en', name: 'EN', flag: '/usa.png' },
+        { code: 'es', name: 'ES', flag: '/mexico.png' },
     ];
 
     const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];
@@ -42,7 +43,11 @@ const LanguageSwitcher = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center gap-1.5 px-3 py-2 bg-white rounded-full text-sm font-medium border border-gray-200 hover:shadow-md transition-all duration-300"
             >
-                <span className="w-4 h-4 flex-shrink-0">{currentLanguage.flag}</span>
+                <img
+                    src={currentLanguage.flag}
+                    alt={currentLanguage.name}
+                    className="w-4 h-4 flex-shrink-0 object-cover"
+                />
                 <span>{currentLanguage.name}</span>
                 <ChevronDown
                     size={14}
@@ -60,7 +65,11 @@ const LanguageSwitcher = () => {
                             className={`flex items-center gap-2 w-full px-3 py-2 text-left hover:bg-gray-50 transition-colors ${locale === language.code ? 'bg-gray-50 font-medium' : ''
                                 }`}
                         >
-                            <span className="w-4 h-4 flex-shrink-0">{language.flag}</span>
+                            <img
+                                src={language.flag}
+                                alt={language.name}
+                                className="w-4 h-4 flex-shrink-0 object-cover"
+                            />
                             <span>{language.name}</span>
                             {locale === language.code && (
                                 <span className="ml-auto w-2 h-2 bg-black rounded-full"></span>

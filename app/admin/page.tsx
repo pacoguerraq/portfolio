@@ -59,7 +59,7 @@ const quickActions = [
     {
         title: 'Assets & Resources',
         description: 'Quick access to tools and resources',
-        href: '/admin/assets',
+        href: '/admin/resources',
         icon: Palette,
         color: 'bg-teal-500',
         count: '5 resources'

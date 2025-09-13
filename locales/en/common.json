@@ -170,5 +170,67 @@
         },
         "copyright": "© {year} Francisco Guerra. All rights reserved.",
         "backToTop": "Back to top"
+    },
+    "clientPortal": {
+        "navbar": {
+            "title": "Brand Assets Portal",
+            "securePortal": "Secure Portal"
+        },
+        "login": {
+            "title": "Brand Assets Portal",
+            "subtitle": "Enter the password provided by your project manager",
+            "passwordLabel": "Access Password",
+            "passwordPlaceholder": "Enter password",
+            "buttonText": "Access Portal",
+            "verifying": "Verifying...",
+            "helpText": "Need help? Contact your project manager for assistance."
+        },
+        "success": {
+            "title": "Successfully Submitted!",
+            "message": "Thank you for providing your brand assets. Your project manager will review the information and get in touch with you soon.",
+            "project": "Project"
+        },
+        "form": {
+            "title": "Brand Assets Collection for",
+            "welcome": {
+                "title": "Welcome to Your Brand Assets Portal",
+                "description": "Please provide the following information to help us create your perfect website. All fields are optional, but the more information you provide, the better we can serve you."
+            },
+            "colorPalette": {
+                "title": "Color Palette",
+                "label": "Brand Colors (Required)",
+                "placeholder": "Please describe your brand colors. You can include:&#10;• Hex codes (e.g., #FF5733, #33A1FF)&#10;• Color names (e.g., Navy blue, Warm orange)&#10;• Color preferences or mood (e.g., Professional, Modern, Vibrant)",
+                "helpText": "Help us understand your brand's color identity"
+            },
+            "businessContent": {
+                "title": "Business Content",
+                "label": "Business Description Document (Required)",
+                "uploadedFile": "✓ File uploaded:",
+                "remove": "Remove",
+                "important": "Important",
+                "importantText": "This document will be used to generate the texts for your website using AI technology. Please include detailed information about your business, services, target audience, and any specific messaging you'd like to convey.",
+                "helpText": "Upload a document with your business description, services, target audience, etc."
+            },
+            "mediaAssets": {
+                "title": "Images & Media Assets",
+                "label": "Upload Your Media Assets",
+                "folderInstructions": "Please upload your logos, images, and other media assets to this shared folder:",
+                "openFolder": "Open Upload Folder",
+                "confirmationLabel": "I have uploaded my media assets to the provided folder",
+                "noFolderMessage": "The upload folder link has not been set up yet. Please contact your project manager for the media upload instructions.",
+                "helpText": "Include your logos, product images, team photos, and any other visual assets for your website"
+            },
+            "additionalInfo": {
+                "title": "Additional Information",
+                "label": "Comments & Special Requests",
+                "placeholder": "Any additional information, special requests, or preferences you'd like us to know about...",
+                "helpText": "Share any other details that will help us create your perfect website"
+            },
+            "submit": {
+                "button": "Submit Brand Assets",
+                "submitting": "Submitting...",
+                "helpText": "Once submitted, your project manager will review the information and contact you"
+            }
+        }
     }
 }

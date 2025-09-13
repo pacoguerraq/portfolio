@@ -1,3 +1,4 @@
+// hooks/useTranslation.ts
 'use client';
 
 import { useLanguage } from '@/providers/LanguageProvider';
