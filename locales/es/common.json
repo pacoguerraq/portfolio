@@ -79,7 +79,7 @@
             "close": "Cerrar"
         },
         "labels": {
-            "inProgress": "En Progreso",
+            "inProgress": "En Proceso",
             "technologies": "Tecnologías",
             "viewProject": "Ver Proyecto"
         },
@@ -119,6 +119,10 @@
             "unlid": {
                 "type": "Plataforma Inmobiliaria",
                 "description": "Una plataforma para publicar y solicitar propiedades inmobiliarias, con autenticación de usuarios, gestión de propiedades y capacidades de búsqueda avanzadas."
+            },
+            "fyve": {
+                "type": "Sitio Web Personalizado",
+                "description": "Un sitio web profesional, responsivo y con optimización de SEO para una empresa en la industria de servicios de alimentos."
             }
         }
     },

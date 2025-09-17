@@ -119,6 +119,10 @@
             "unlid": {
                 "type": "Real Estate Platform",
                 "description": "A platform for posting and requesting real estate properties, featuring user authentication, property management, and advanced search capabilities."
+            },
+            "fyve": {
+                "type": "Custom Website",
+                "description": "A professional, responsive and SEO-friendly website for a company in the food service industry."
             }
         }
     },

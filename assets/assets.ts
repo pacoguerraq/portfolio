@@ -240,6 +240,26 @@ interface WorkItem {
 
 export const workData: WorkItem[] = [
     {
+        title: 'Frutas y Verduras Exclusivas',
+        type: 'work.projects.fyve.type',
+        category: 'static-website',
+        inProgress: false,
+        description: 'work.projects.fyve.description',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Claude AI', 'Gemini Nano Banana'],
+        bgImage: '/fyve.png',
+        link: "https://www.fyvefoodservice.com/"
+    },
+    {
+        title: 'Unlid',
+        type: 'work.projects.unlid.type',
+        category: 'custom-platform',
+        inProgress: false,
+        description: 'work.projects.unlid.description',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
+        bgImage: '/unlid.png',
+        link: "https://www.unlid.com.mx/"
+    },
+    {
         title: 'Fyradrive',
         type: 'work.projects.fyradrive.type',
         category: 'custom-platform',
@@ -314,16 +334,6 @@ export const workData: WorkItem[] = [
         bgImage: '/starts.png',
         link: "https://starts-nu.vercel.app/"
     },
-    {
-        title: 'Unlid',
-        type: 'work.projects.unlid.type',
-        category: 'custom-platform',
-        inProgress: true,
-        description: 'work.projects.unlid.description',
-        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
-        bgImage: '/unlid.png',
-        link: "https://www.unlid.com.mx/"
-    }
 ];
 
 interface ToolItem {
