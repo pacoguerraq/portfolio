@@ -2,7 +2,6 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
 
 type Locale = 'en' | 'es';
 
@@ -15,8 +14,6 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     const [locale, setLocale] = useState<Locale>('en');
-    const router = useRouter();
-    const pathname = usePathname();
 
     // Load language preference from localStorage on client side
     useEffect(() => {
