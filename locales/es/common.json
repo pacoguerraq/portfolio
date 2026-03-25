@@ -108,6 +108,10 @@
                 "type": "Sitio Web Personalizado",
                 "description": "Desarrollé un sitio web profesional para servicios legales e inmobiliarios, mejorando la presencia en línea."
             },
+            "partidum": {
+                "type": "Plataforma de Gestion de Torneos Deportivos",
+                "description": "Una plataforma web para la gestion profesional de torneos de futbol, donde los organizadores crean y administran equipos, jornadas, partidos y resultados, mientras que los participantes consultan estadisticas en tiempo real desde una URL publica."
+            },
             "contagg": {
                 "type": "Plataforma de Dispositivos NFC",
                 "description": "Una plataforma para gestionar dispositivos NFC para compartir información personal, médica o de mascotas de forma segura, incluye activación de dispositivos, gestión de perfiles y análisis de escaneos."

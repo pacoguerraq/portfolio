@@ -50,6 +50,10 @@ import right_arrow_bold from './media/right-arrow-bold.png';
 import right_arrow_bold_dark from './media/right-arrow-bold-dark.png';
 import claude from './media/claude.png';
 import github from './media/github.png';
+import cursor from './media/cursor.png';
+import githubCopilot from './media/github-copilot.png';
+import python from './media/python.png';
+import typescript from './media/typescript.png';
 import { StaticImageData } from 'next/image';
 
 interface WorkItem {
@@ -115,6 +119,10 @@ interface Assets {
     right_arrow_bold_dark: StaticImageData;
     claude: StaticImageData;
     github: StaticImageData;
+    cursor: StaticImageData;
+    githubCopilot: StaticImageData;
+    python: StaticImageData;
+    typescript: StaticImageData;
 }
 
 export const assets: Assets = {
@@ -168,7 +176,11 @@ export const assets: Assets = {
     right_arrow_bold,
     right_arrow_bold_dark,
     claude,
-    github
+    github,
+    cursor,
+    githubCopilot,
+    python,
+    typescript
 };
 
 interface InfoItem {
@@ -240,16 +252,6 @@ interface WorkItem {
 
 export const workData: WorkItem[] = [
     {
-        title: 'Frutas y Verduras Exclusivas',
-        type: 'work.projects.fyve.type',
-        category: 'static-website',
-        inProgress: false,
-        description: 'work.projects.fyve.description',
-        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Claude AI', 'Gemini Nano Banana'],
-        bgImage: '/fyve.png',
-        link: "https://www.fyvefoodservice.com/"
-    },
-    {
         title: 'Unlid',
         type: 'work.projects.unlid.type',
         category: 'custom-platform',
@@ -260,6 +262,15 @@ export const workData: WorkItem[] = [
         link: "https://www.unlid.com.mx/"
     },
     {
+        title: 'Partidum',
+        type: 'work.projects.partidum.type',
+        category: 'custom-platform',
+        description: 'work.projects.partidum.description',
+        techStack: ['Next.js', 'TypeScript', 'AWS API Gateway', 'AWS Lambda', 'AWS Cognito', 'AWS RDS Postgres', 'AWS S3', 'AWS SES', 'Vercel'],
+        bgImage: '/partidum.png',
+        link: "https://partidum.com/",
+    },
+    {
         title: 'Fyradrive',
         type: 'work.projects.fyradrive.type',
         category: 'custom-platform',
@@ -267,6 +278,15 @@ export const workData: WorkItem[] = [
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Motion'],
         bgImage: '/fyradrive.png',
         link: "https://fyradrive.com/",
+    },
+    {
+        title: 'Pastelería El Postre',
+        type: 'work.projects.elpostre.type',
+        category: 'custom-platform',
+        description: 'work.projects.elpostre.description',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
+        bgImage: '/elpostre.png',
+        link: "https://www.elpostre.com.mx/",
     },
     {
         title: 'Vía Propósito',
@@ -279,6 +299,25 @@ export const workData: WorkItem[] = [
         link: "https://viaproposito.vercel.app/"
     },
     {
+        title: 'We The People',
+        type: 'work.projects.wtp.type',
+        category: 'custom-platform',
+        description: 'work.projects.wtp.description',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
+        bgImage: '/wethepeople.png',
+        link: "https://wethepeoplewear.vercel.app/",
+    },
+    {
+        title: 'Frutas y Verduras Exclusivas',
+        type: 'work.projects.fyve.type',
+        category: 'static-website',
+        inProgress: false,
+        description: 'work.projects.fyve.description',
+        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Claude AI', 'Gemini Nano Banana'],
+        bgImage: '/fyve.png',
+        link: "https://www.fyvefoodservice.com/"
+    },
+    {
         title: 'Portfolio Site',
         type: 'work.projects.portfolio.type',
         category: 'static-website',
@@ -286,24 +325,6 @@ export const workData: WorkItem[] = [
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vercel', 'Motion', 'Web3Forms'],
         bgImage: '/pacoguerraq.png',
         link: "https://www.pacoguerraq.com/",
-    },
-    {
-        title: 'We The People',
-        type: 'work.projects.wtp.type',
-        category: 'custom-platform',
-        description: 'work.projects.wtp.description',
-        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
-        bgImage: '/wethepeople.png',
-        link: "https://www.wethepeoplewear.com.mx/",
-    },
-    {
-        title: 'Pastelería El Postre',
-        type: 'work.projects.elpostre.type',
-        category: 'custom-platform',
-        description: 'work.projects.elpostre.description',
-        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'PostgreSQL', 'Vercel', 'Stripe', 'Next-Auth', 'Nodemailer'],
-        bgImage: '/elpostre.png',
-        link: "https://www.elpostre.com.mx/",
     },
     {
         title: 'Cassad',
@@ -324,16 +345,16 @@ export const workData: WorkItem[] = [
         bgImage: '/contagg.png',
         link: "https://contagg.vercel.app/",
     },
-    {
-        title: 'STARTS',
-        type: 'work.projects.starts.type',
-        category: 'custom-platform',
-        inProgress: true,
-        description: 'work.projects.starts.description',
-        techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'AWS Cognito', 'AWS RDS Postgres', 'AWS S3', 'AWS Lambda', 'AWS API Gateway'],
-        bgImage: '/starts.png',
-        link: "https://starts-nu.vercel.app/"
-    },
+    // {
+    //     title: 'STARTS',
+    //     type: 'work.projects.starts.type',
+    //     category: 'custom-platform',
+    //     inProgress: true,
+    //     description: 'work.projects.starts.description',
+    //     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'AWS Cognito', 'AWS RDS Postgres', 'AWS S3', 'AWS Lambda', 'AWS API Gateway'],
+    //     bgImage: '/starts.png',
+    //     link: "https://starts-nu.vercel.app/"
+    // },
 ];
 
 interface ToolItem {
@@ -349,6 +370,11 @@ export const toolsData: ToolItem[] = [
         darkIcon: assets.vscode
     },
     {
+        name: 'Cursor',
+        icon: assets.cursor,
+        darkIcon: assets.cursor
+    },
+    {
         name: 'Git Version Control',
         icon: assets.git,
         darkIcon: assets.git
@@ -359,9 +385,24 @@ export const toolsData: ToolItem[] = [
         darkIcon: assets.github
     },
     {
+        name: 'GitHub Copilot',
+        icon: assets.githubCopilot,
+        darkIcon: assets.githubCopilot
+    },
+    {
         name: 'HTML & CSS',
         icon: assets.htmlcss,
         darkIcon: assets.htmlcss
+    },
+    {
+        name: 'Typescript',
+        icon: assets.typescript,
+        darkIcon: assets.typescript
+    },
+    {
+        name: 'Python',
+        icon: assets.python,
+        darkIcon: assets.python
     },
     {
         name: 'React',
@@ -399,8 +440,8 @@ export const toolsData: ToolItem[] = [
         darkIcon: assets.postgres
     },
     {
-        name: 'Claude AI',
+        name: 'Claude Code',
         icon: assets.claude,
         darkIcon: assets.claude
-    }
+    },
 ];

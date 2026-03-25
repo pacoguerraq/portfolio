@@ -108,6 +108,10 @@
                 "type": "Custom Website",
                 "description": "Developed a professional website for legal and real estate services, enhancing online presence."
             },
+            "partidum": {
+                "type": "Sports Tournament Management Platform",
+                "description": "A web platform for the professional management of soccer tournaments, where organizers create and manage teams, rounds, matches, and results while participants access live statistics through a public URL."
+            },
             "contagg": {
                 "type": "NFC Devices Platform",
                 "description": "A platform to manage NFC devices for sharing personal, medical, or pet info securely—includes device activation, profile management, and scan analytics."
