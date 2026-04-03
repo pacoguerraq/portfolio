@@ -127,6 +127,10 @@
             "fyve": {
                 "type": "Custom Website",
                 "description": "A professional, responsive and SEO-friendly website for a company in the food service industry."
+            },
+            "pablooeemilio": {
+                "type": "Photography Portfolio",
+                "description": "A photography and photo direction portfolio for Pablo Emilio, built as a clean and visual static website to showcase his work."
             }
         }
     },
