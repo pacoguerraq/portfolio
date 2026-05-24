@@ -342,7 +342,7 @@ export const workData: WorkItem[] = [
         description: 'work.projects.cassad.description',
         techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Vercel'],
         bgImage: '/cassad.png',
-        link: "https://cassad.vercel.app/",
+        link: "https://www.cassad.com.mx/",
     },
     // {
     //     title: 'ConTagg',
